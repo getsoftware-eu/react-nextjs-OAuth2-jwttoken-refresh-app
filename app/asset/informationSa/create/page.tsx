@@ -23,14 +23,14 @@ function createPostFormData(asset: AssetDTO) {
   return formData;
 }
 
-function CreateInformation({ availableOwnerList, availableVertreterList, availableBearbeiterList }) {
+function CreateInformation({ props }) {
   const { data: session } = useSession();
   const router = useRouter();
   const axiosAuth = useAxiosAuth();
 
   //TODO const informationService = new InformationService(session);
 
-  const [informations, setInformations] = useState();
+  const [assets, setAssets] = useState();
 
   const formBtnRef = useRef(null); //btn form action
 
@@ -43,29 +43,29 @@ function CreateInformation({ availableOwnerList, availableVertreterList, availab
   const fetchPost = async (formData: any) => {
     const res = await axiosAuth.post("/api/v1/asset/informations/", formData);
 
-    let informationArray = res.data;
-    if (Array.isArray(informationArray)) {
-      setInformations(informationArray);
+    let serverAssetArray = res.data;
+    if (Array.isArray(serverAssetArray)) {
+      setAssets(serverAssetArray);
     }
   };
   
   const onSubmit = (data: any) => {
 
-    let user: UserDTO = null;
+    let _user: UserDTO = null;
     
-    let information: AssetDTO = {
+    let _asset: AssetDTO = {
       entityId: data.entityId,
       name: data.name,
       saStatus: data.saStatus,
       sbStatus: data.sbStatus,
-      owner: user,
-      vertreter: user,
-      editor: user,
+      ownerId: null,
+      vertreterId: null,
+      editorId: null,
       beschreibung: data.beschreibung,
       canEdit: data.canEdit
     };
 
-    let formData = createPostFormData(information);
+    let formData = createPostFormData(_asset);
 
     toast.promise(
         //TODO informationService.save(formData)

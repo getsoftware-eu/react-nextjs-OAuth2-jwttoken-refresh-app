@@ -1,18 +1,13 @@
 "use client";
 import {H1} from "/components/common/Сontent";
 import React, {useEffect, useState} from "react";
-import InformationSaListTable from "/components/asset/information/sa/InformationSaListTable";
-import InformationSaListDataTable from "/components/asset/information/sa/InformationSaListDataTable";
+import AssetSaListPrimeReactDataTable from "/components/asset/information/sa/AssetSaListPrimeReactDataTable";
 import SideNav from "/components/common/nav/SideNav";
-import TopNav from "/components/common/nav/TopNav";
 import AppTopNav from "../../../AppTopNav";
 import FooterNav from "/components/common/nav/FooterNav";
 // import UserService from "/services/userService";
 import {useSession} from "next-auth/react";
-// import Interceptor from "/interceptors/interceptor";
-import * as Session from "next-auth/react";
 // import InformationService from "/services/informationService";
-import Cookies from 'universal-cookie';
 import useAxiosAuth from "../../../../lib/hooks/useAxiosAuth";
 
 export default function InformationSaList({ params }) {
@@ -60,7 +55,7 @@ export default function InformationSaList({ params }) {
                             <div className="col-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <InformationSaListDataTable givenAssets={assets}/>
+                                        <AssetSaListPrimeReactDataTable givenAssets={assets}/>
                                     </div>
                                 </div>
                             </div>
