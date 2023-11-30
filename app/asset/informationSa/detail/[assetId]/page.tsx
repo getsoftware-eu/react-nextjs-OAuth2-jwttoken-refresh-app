@@ -1,6 +1,7 @@
 "use client"
 import React, {useEffect, useRef, useState} from "react";
 // import UserService from "/services/userService";
+//TODO Using useReducer to perform advanced validation on Reactjs forms
 import {useSession} from "next-auth/react";
 import {useRouter} from "next/navigation";
 // import { useDispatch } from "react-redux";
@@ -13,23 +14,13 @@ import {H1} from "/components/common/Сontent";
 import FooterNav from "/components/common/nav/FooterNav";
 import {useForm} from "react-hook-form";
 import useAxiosAuth from "../../../../../lib/hooks/useAxiosAuth";
-
-// export async function generateStaticParams() {
-//   return [{ id: '1' }, { id: '2' }]
-// }
-
-// async function getPost(params) {
-//   const res = await fetch(`https://.../posts/${params.id}`)
-//   const post = await res.json()
-//
-//   return post
-// }
+import {AssetDTO, UserDTO} from "../../../../../types/interfacesDTO";
 
 function InformationDetail({ params }) {
 
   const assetId = params.assetId;
 
-  let getrequested = false;
+  let isServerAssetRequested = false;
 
   const { data: session } = useSession();
   // const userService = new UserService(session);
@@ -39,125 +30,39 @@ function InformationDetail({ params }) {
   const router = useRouter();
   // const dispatch = useDispatch();
 
-  const [assetname, setAssetname] = useState(''); // Declare a state variable...
-  const [assetbeschreibung, setAssetbeschreibung] = useState(''); // Declare a state variable...
+  const [asset, setAsset] = useState({}); // Declare an init state, sonst undefined state error...
 
-  const [information, setInformation] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const formBtnRef = useRef(null); //btn form action
-
-  const [user, setUser] = useState({});
-  const [userInfo, setUserInfo] = useState({});
-
+  
   // useEffect(() => {
-  //   let username = session?.user?.name;
-
-    // if(!username)
-    //   username = "admin"
-
-    // if(username){
-    //   userService
-    //       .getByUsername(username)
-    //       .then((res) => setUserInfo(res.data));
-    // }
-
-  // }, [session]);  
-  
-  useEffect(() => {
-    if(information.name)
-    {
-      setAssetname(information.name)
-      setAssetbeschreibung(information.beschreibung)
-    }
-  }, [information]);
-  
-  useEffect(() => {
-    if(session && getrequested)
-      return;
-    getAsynchData();
-  }, [session]);
-
-  
-  const fetchPost = async () => {
-
-    if(session)
-      getrequested = true;
-      
-    const res = await axiosAuth.get("/api/v1/asset/informations/" + assetId);
-
-    let information = res.data;
-      
-    setInformation(information);
-
-    getrequested = true;
-
-  };
-  
-  const getAsynchData = async () => {
-    if (session) 
-    {
-     
-      // await userService.getByEmail(session?.user?.email).then((res) => {
-      //   const userInfo = res.data;
-      //   // let isInformationFavorite = userInfo.favoriteInformations?.some(
-      //   //   (h) => h.assetId === information.informationId
-      //   // );
-      //   setUser(userInfo);
-      // });
-      fetchPost().then();
-      // await informationService.getById(assetId).then((res) => {
-      //   const infa = res.data;
-      //   setInformation(infa);
-      // });
-    }
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
-  // const handleFavoriteInformationIcon = () => {
-  //   if (session) {
-  //     if (!isFavorite) {
-  //       toast.promise(
-  //         userService.addInformationToFavorites(user?.userId, information).then((res) => {
-  //           if (res.status === 200) setIsFavorite(true);
-  //         }),
-  //         {
-  //           loading: "Saving...",
-  //           success: <b>Added to favourites!</b>,
-  //           error: <b>Could not added.</b>,
-  //         }
-  //       );
-  //     } else {
-  //       toast.promise(
-  //         userService
-  //           .removeInformationFromFavorites(user?.userId, information)
-  //           .then((res) => {
-  //             if (res.status === 200) setIsFavorite(false);
-  //           }),
-  //         {
-  //           loading: "Removing...",
-  //           success: <b>Removed from favourites!</b>,
-  //           error: <b>Could not removed.</b>,
-  //         }
-  //       );
-  //     }
-  //   } else {
-  //     toast.error("Please login to add to favourites.", {
-  //       style: {
-  //         border: "1px solid #ed6172",
-  //         padding: "8px",
-  //         color: "#ed6172",
-  //       },
-  //       iconTheme: {
-  //         primary: "#ed6172",
-  //         secondary: "#FFFAEE",
-  //       },
-  //     });
+  //   if(tempAsset.name)
+  //   {
+  //     setAsset(tempAsset)
   //   }
-  // };
+  // }, [tempAsset]);
 
+  const getServerAsynchData = async () => {
+    if (session)
+    {
+      isServerAssetRequested = true;
+      const res = await axiosAuth.get("/api/v1/asset/informations/" + assetId);
+
+      let tempAsset = res.data;
+      if(tempAsset.name)
+      {
+        setAsset(tempAsset);
+      }
+      else isServerAssetRequested = false;
+    }
+  };
+  
+  useEffect(() => {
+    if(session && isServerAssetRequested)
+      return;
+    
+    getServerAsynchData();
+  }, [session]);
+  
 
   const {
     register,
@@ -165,37 +70,39 @@ function InformationDetail({ params }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    let formData = new FormData();
+  const onSubmit = (formDataValues) => {
 
-    let tempInformation = {
-      entityId: information.entityId,
-      name: assetname,
-      saStatus: data.saStatus,
-      sbStatus: data.sbStatus,
-      owner: userInfo,
-      vertreter: userInfo,
-      editor: userInfo,
-      beschreibung: assetbeschreibung,
+    let usr: UserDTO = null;
+    
+    let submitAsset: AssetDTO = {
+      entityId: assetId,
+      name: asset.name,
+      saStatus: formDataValues.saStatus,
+      sbStatus: formDataValues.sbStatus,
+      ownerId: 0,
+      vertreterId: 0,
+      editorId: 0,
+      beschreibung: asset.beschreibung,
       // location: location,
       // category: selectedCategory,
-      canEdit: data.canEdit
+      canEdit: formDataValues.canEdit
     };
 
-    const json = JSON.stringify(tempInformation);
+    ///TODO extract
+    const json = JSON.stringify(submitAsset);
     const blob = new Blob([json], {
       type: "application/json",
     });
-    formData.append("information", blob);
-    // selectedImageFiles.forEach((imageFile) =>
-    //   formData.append("multipartFile", imageFile)
-    // );
+    let formData = new FormData();
+    formData.append("asset", blob);
+    //////
+    
     toast.promise(
         // informationService.update(formData, information.entityId).then((res) => {
         axiosAuth
-            .post("/api/v1/asset/informations/" + assetId + "/update", formData, {
+            .put("/api/v1/asset/informations/" + assetId, formData, {
               headers: {
-                'Content-Type':'multipart/form-data', //TODO json
+                'Content-Type':'multipart/form-data',  
               },
             })   
         .then((res) => {   
@@ -256,6 +163,10 @@ function InformationDetail({ params }) {
   //   }
   // };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setAsset((prevAsset) => ({ ...prevAsset, [name]: value }));
+  };
 
   return (
       <>
@@ -274,10 +185,6 @@ function InformationDetail({ params }) {
                   <div className="col-12">
                     <div className="card">
                       <div className="card-body">
-
-
-
-
                         {/*<div className="max-w-7xl mx-auto my-4">*/}
                         {/*  <div className="grid grid-cols-1 sm:grid-cols-2">*/}
                         {/*    <div>*/}
@@ -288,20 +195,21 @@ function InformationDetail({ params }) {
                             className="flex flex-col mx-auto gap-2 w-fit mt-10 space-y-3"
                             onSubmit={handleSubmit(onSubmit)}
                         >
-
-                          <input type="hidden" id="entityId" name="entityId" value={information.entityId}/>
+                          <input type="hidden" id="entityId" name="entityId" value={assetId}/>
                           
                           <div className="row mb-3">
                             <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
                             <div className="col-sm-10 error-placeholder">
                               {/*<input type="text" className="form-control" id="name" name="name" placeholder="Name" value="${(asset.name)!}">*/}
-                              <input type="text" name="name" required={true}
+                              <input type="text" required={true}
                                      {...register("name", {
+                                       // onChange: handleInputChange,
                                        // required: "Please enter beschreibung",
                                      })}
                                      // defaultValue={assetName}
-                                     value={assetname} // ...force the input's value to match the state variable...
-                                     onChange={e => setAssetname(e.target.value)} // ... and update the state variable on any edits!
+                                     value={asset.name || ''} // ...force the input's value to match the state variable...
+                                     onChange={handleInputChange}
+                                      // ... and update the state variable on any edits!
                                      className="form-control"
                               />
                               <p className="text-[#ed6172] font-semibold px-2">
@@ -313,12 +221,13 @@ function InformationDetail({ params }) {
                             <label htmlFor="beschreibung" className="col-sm-2 col-form-label">Beschreibung</label>
                             <div className="col-sm-10 error-placeholder">
                               {/*<input type="text" className="form-control" id="name" name="name" placeholder="Name" value="${(asset.name)!}">*/}
-                              <input type="text" id="beschreibung" name="beschreibung" placeholder="Beschreibung"
+                              <input type="text" id="beschreibung" placeholder="Beschreibung"
                                      {...register("beschreibung", {
                                        // required: "Please enter beschreibung",
+                                       // onChange: handleInputChange,
                                      })}
-                                     value={assetbeschreibung}
-                                     onChange={e => setAssetbeschreibung(e.target.value)} // ... and update the state variable on any edits!
+                                     value={asset.beschreibung || ''}
+                                     onChange={handleInputChange} // ... and update the state variable on any edits!
                                      className="form-control"
                               />
                               <p className="text-[#ed6172] font-semibold px-2">
@@ -527,6 +436,52 @@ function InformationDetail({ params }) {
       </>
   )
 
+  // const closeModal = () => {
+  //   setIsOpen(false);
+  // };
+  //
+  // const handleFavoriteInformationIcon = () => {
+  //   if (session) {
+  //     if (!isFavorite) {
+  //       toast.promise(
+  //         userService.addInformationToFavorites(user?.userId, information).then((res) => {
+  //           if (res.status === 200) setIsFavorite(true);
+  //         }),
+  //         {
+  //           loading: "Saving...",
+  //           success: <b>Added to favourites!</b>,
+  //           error: <b>Could not added.</b>,
+  //         }
+  //       );
+  //     } else {
+  //       toast.promise(
+  //         userService
+  //           .removeInformationFromFavorites(user?.userId, information)
+  //           .then((res) => {
+  //             if (res.status === 200) setIsFavorite(false);
+  //           }),
+  //         {
+  //           loading: "Removing...",
+  //           success: <b>Removed from favourites!</b>,
+  //           error: <b>Could not removed.</b>,
+  //         }
+  //       );
+  //     }
+  //   } else {
+  //     toast.error("Please login to add to favourites.", {
+  //       style: {
+  //         border: "1px solid #ed6172",
+  //         padding: "8px",
+  //         color: "#ed6172",
+  //       },
+  //       iconTheme: {
+  //         primary: "#ed6172",
+  //         secondary: "#FFFAEE",
+  //       },
+  //     });
+  //   }
+  // };
+
   // return (
   //   <div className="pb-10">
   //     {/*<Header />*/}
@@ -714,6 +669,9 @@ function InformationDetail({ params }) {
   //       {/*  </div>*/}
   //       {/*</div>*/}
   //     </div>
+  //
+  // const [isOpen, setIsOpen] = useState(false);
+  //
   //
   //     {isOpen && (
   //       <ImageDialog
