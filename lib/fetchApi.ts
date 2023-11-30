@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "pages/api/auth/[...nextauth]";
-const BASE_URL = "http://localhost:8000";
-async function refreshToken(refreshToken: string) {
-  const res = await fetch(BASE_URL + "/auth/refresh", {
+const BASE_URL = "http://localhost:8080";
+async function refreshToken(refreshTokenString: string) {
+  const res = await fetch(BASE_URL + "/api/v1/auth/refresh/accessToken", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      refresh: refreshToken,
+      refresh: refreshTokenString,
     }),
   });
   const data = await res.json();
@@ -17,8 +17,9 @@ async function refreshToken(refreshToken: string) {
 
 export async function AuthGetApi(url: string) {
   const session = await getServerSession(authOptions);
-  console.log("before: ", session?.user.accessToken);
+  console.log("before refresh: session?.user.accessToken=", session?.user.accessToken);
 
+  console.log("before fetch: " + BASE_URL + url);
   let res = await fetch(BASE_URL + url, {
     method: "GET",
     headers: {
@@ -27,16 +28,20 @@ export async function AuthGetApi(url: string) {
   });
 
   if (res.status == 401) {
+    console.log("res.status == 401");
     if (session) session.user.accessToken = await refreshToken(session?.user.refreshToken ?? "");
-    console.log("after: ", session?.user.accessToken);
+    console.log("after 401 refresh: session?.user.accessToken=", session?.user.accessToken);
 
+    console.log("before 401 fetch: " + BASE_URL + url);
     res = await fetch(BASE_URL + url, {
       method: "GET",
       headers: {
         Authorization: `bearer ${session?.user.accessToken}`,
       },
     });
-    return await res.json();
+    const result = await res.json();
+    console.log("after fetch: " + BASE_URL + url + ": " + result);
+    return result;
   }
 
   return await res.json();

@@ -4,8 +4,10 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
 
 const ServerPage = async () => {
-  const posts = await AuthGetApi("/test/user/1/posts");
+  const posts = await AuthGetApi("/api/v1/asset/informations/");
 
+  console.log("AuthGetApi: " + posts);
+  
   return <div>{JSON.stringify(posts)}</div>;
 };
 

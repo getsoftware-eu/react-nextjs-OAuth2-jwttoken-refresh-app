@@ -8,7 +8,7 @@ declare module "next-auth" {
     user: {
       /** The user's postal address. */
       id: number;
-      userName: string;
+      username: string;
       name: string;
       email: string;
       address: string;
