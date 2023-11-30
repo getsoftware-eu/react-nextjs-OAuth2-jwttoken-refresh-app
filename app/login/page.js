@@ -8,8 +8,6 @@ import { useForm } from "react-hook-form";
 // import {remove} from "/redux/userSlice";
 // import {LogoutIcon} from "@heroicons/react/outline";
 // import {useDispatch} from "react-redux";
-// import CookieExample from '../components/common/cookies/CookieExample';
-// import ServerCookieExample from '../components/common/cookies/ServerCookieExample';
 
 function Login() {
 
@@ -34,25 +32,10 @@ function Login() {
     return (
         <>
           Signed in as {session.user.username} <br />
-
-          <p
-              className="btn btn-danger"
-              onClick={() => {
-                // dispatch(remove());
-                // serverLogout();
-                signOut({callbackUrl: 'http://localhost:3000/login'});
-                
-              }}
-          >
-            {/*<LogoutIcon className="w-5 h-5" />*/}
-            <span>Logout</span>
-          </p>
-          
-          {/*<button onClick={() => signOut()}>Sign out</button>*/}
+          <span>Loading...</span>
         </>
     )
   }
-
 
   return (
       <>
@@ -64,7 +47,6 @@ function Login() {
           <main className="container h-100">
             <div className="row h-100">
               <div className="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-                {/*<#nested />*/}
                 <div className="d-table-cell align-middle">
                   <div className="text-center mt-4">
                     <p className="lead">
@@ -131,8 +113,6 @@ function Login() {
                             {/*  <!-- <button type="submit" className="btn btn-lg btn-primary">Sign in</button> -->*/}
                           </div>
                         </form>
-                        {/*<ServerCookieExample />*/}
-
                       </div>
                     </div>
                   </div>

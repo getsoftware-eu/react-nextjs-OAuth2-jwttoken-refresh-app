@@ -10,33 +10,29 @@ import AppTopNav from "../../../AppTopNav";
 import {H1} from "/components/common/Сontent";
 import FooterNav from "/components/common/nav/FooterNav";
 import useAxiosAuth from "../../../../lib/hooks/useAxiosAuth";
+import {AssetDTO, UserDTO} from "../../../../types/interfacesDTO";
+
+//TODO extract global method
+function createPostFormData(asset: AssetDTO) {
+  const json = JSON.stringify(asset);
+  const blob = new Blob([json], {
+    type: "application/json",
+  });
+  let formData = new FormData();
+  formData.append("asset", blob);
+  return formData;
+}
 
 function CreateInformation({ availableOwnerList, availableVertreterList, availableBearbeiterList }) {
   const { data: session } = useSession();
   const router = useRouter();
   const axiosAuth = useAxiosAuth();
 
-  // const informationService = new InformationService(session);
+  //TODO const informationService = new InformationService(session);
 
-  const [userInfo, setUserInfo] = useState({});
+  const [informations, setInformations] = useState();
 
   const formBtnRef = useRef(null); //btn form action
-
-  // const userService = new UserService(session);
-
-  // useEffect(() => {
-  //   let username = session?.user?.name;
-    
-    // if(!username)
-    //   username = "admin"
-    
-    // if(username){
-    //   userService
-    //       .getByUsername(username)
-    //       .then((res) => setUserInfo(res.data));
-    // }
-
-  // }, [session]);
 
   const {
     register,
@@ -44,7 +40,7 @@ function CreateInformation({ availableOwnerList, availableVertreterList, availab
     formState: { errors },
   } = useForm();
 
-  const fetchPost = async (formData) => {
+  const fetchPost = async (formData: any) => {
     const res = await axiosAuth.post("/api/v1/asset/informations/", formData);
 
     let informationArray = res.data;
@@ -53,39 +49,32 @@ function CreateInformation({ availableOwnerList, availableVertreterList, availab
     }
   };
   
-  const onSubmit = (data) => {
-    let formData = new FormData();
+  const onSubmit = (data: any) => {
 
-    let information = {
+    let user: UserDTO = null;
+    
+    let information: AssetDTO = {
       entityId: data.entityId,
       name: data.name,
       saStatus: data.saStatus,
       sbStatus: data.sbStatus,
-      owner: userInfo,
-      vertreter: userInfo,
-      editor: userInfo,
+      owner: user,
+      vertreter: user,
+      editor: user,
       beschreibung: data.beschreibung,
-      // location: location,
-      // category: selectedCategory,
       canEdit: data.canEdit
     };
 
-    const json = JSON.stringify(information);
-    const blob = new Blob([json], {
-      type: "application/json",
-    });
-    formData.append("information", blob);
-    // selectedImageFiles.forEach((imageFile) =>
-    //   formData.append("multipartFile", imageFile)
-    // );
+    let formData = createPostFormData(information);
+
     toast.promise(
+        //TODO informationService.save(formData)
         axiosAuth
         .post("/api/v1/asset/informations/" + "save", formData, {
               headers: {
-                'Content-Type':'multipart/form-data', //TODO json
+                'Content-Type':'multipart/form-data',  
               },
             })
-            // informationService.save(formData)
             .then((res) => {
         if(res.status === 200)
           router.push("/asset/informationSa/detail/" + res.data.entityId);
@@ -108,47 +97,19 @@ function CreateInformation({ availableOwnerList, availableVertreterList, availab
     )
   };
 
-  // const selectImageUrl = (e) => {
-  //   if (e.target.files) {
-  //     setSelectedImageFiles(Array.from(e.target.files));
-  //
-  //     const imagesUrlArray = Array.from(e.target.files).map((image) => {
-  //       return URL.createObjectURL(image);
-  //     });
-  //
-  //     setSelectedImageUrls((previousImageUrls) =>
-  //       previousImageUrls.concat(imagesUrlArray)
-  //     );
-  //
-  //     let firstImage = imagesUrlArray[0];
-  //     setFirstImage(firstImage);
-  //   }
-  // };
-
-  const handleSelectCity = (cityId) => {
-    let selectedCity = cities.filter((city) => city.cityId == cityId)[0];
-    setSelectedCity(selectedCity);
-  };
-
+  /**
+  //Eu: reaction of changed select from
   const handleSelectCategory = (categoryId) => {
     let category = categories.filter(
       (item) => item.categoryId == categoryId
     )[0];
-    setSelectedCategory(category);
+    setSelectedCategory(category);//useState
   };
 
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  // const removeImageModal = () => {
-  //   setIsOpen(false);
-  //   const imageList = selectedImageUrls.filter(
-  //     (image) => image !== selectedImageForDetail
-  //   );
-  //   setSelectedImageUrls(imageList);
-  // };
-
+  **/
   
   return (
       <>
@@ -181,7 +142,7 @@ function CreateInformation({ availableOwnerList, availableVertreterList, availab
                               {/*<h2 className="text-center text-3xl font-semibold mt-20">*/}
                               {/*  Save Your Information*/}
                               {/*</h2>*/}
-                              <form id="informationForm"
+                              <form id="assetForm"
                                   className=""
                                   onSubmit={handleSubmit(onSubmit)}
                               >
@@ -191,7 +152,7 @@ function CreateInformation({ availableOwnerList, availableVertreterList, availab
                                   <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
                                   <div className="col-sm-10 error-placeholder">
                                     {/*<input type="text" className="form-control" id="name" name="name" placeholder="Name" value="${(asset.name)!}">*/}
-                                    <input type="text" id="name" name="name" placeholder="Name"
+                                    <input type="text" id="name" placeholder="Name"
                                            {...register("name", {
                                              required: "Please enter name",
                                            })}
@@ -207,7 +168,7 @@ function CreateInformation({ availableOwnerList, availableVertreterList, availab
                                   <label htmlFor="beschreibung" className="col-sm-2 col-form-label">Beschreibung</label>
                                   <div className="col-sm-10 error-placeholder">
                                     {/*<input type="text" className="form-control" id="name" name="name" placeholder="Name" value="${(asset.name)!}">*/}
-                                    <input type="text" id="beschreibung" name="beschreibung" placeholder="Beschreibung"
+                                    <input type="text" id="beschreibung" placeholder="Beschreibung"
                                            {...register("beschreibung", {
                                              // required: "Please enter beschreibung",
                                            })}
@@ -316,48 +277,7 @@ function CreateInformation({ availableOwnerList, availableVertreterList, availab
         </div>
       </>
   )
-  
-  
-  // return (
-  //   <div className="relative">
-  //     <Header />
-  //     <Toaster position="top-center" />
-  //    
-  //
-  //     {/*{isOpen && (*/}
-  //     {/*  <ImageDialog*/}
-  //     {/*    imageUrl={selectedImageForDetail}*/}
-  //     {/*    isOpen={isOpen}*/}
-  //     {/*    closeModal={closeModal}*/}
-  //     {/*    removeImageModal={removeImageModal}*/}
-  //     {/*    isRemoveBtnExist={true}*/}
-  //     {/*  />*/}
-  //     {/*)}*/}
-  //   </div>
-  // );
 }
 
-// export async function getServerSideProps() {
-
-  // const availableOwnerList = await fetch("http://localhost:8080/api/v1/asset/informations/availableOwners").then(
-  //     (res) => res.json()
-  // );  
-  //
-  // const availableVertreterList = await fetch("http://localhost:8080/api/v1/asset/informations/availableVertreters").then(
-  //     (res) => res.json()
-  // );
-  //
-  // const availableBearbeiterList = await fetch("http://localhost:8080/api/v1/asset/informations/availableBearbeiters").then(
-  //   (res) => res.json()
-  // );
-
-  // return {
-  //   props: {
-      // availableOwnerList,
-      // availableVertreterList,
-      // availableBearbeiterList
-    // },
-  // };
-// }
 
 export default CreateInformation;

@@ -17,13 +17,11 @@ import { Tag } from 'primereact/tag';
 import {useSession} from "next-auth/react";
 import Link from "next/link";
 
-function InformationSaDataListTable({ informations }) { //props
+function InformationSaDataListTable({ givenAssets }) { //props
 
     const { data: session } = useSession();
     
-    let useTestData = false
-    
-    let emptyProduct = {
+    let emptyAsset = {
         entityId: null,
         name: '',
         beschreibung: '',
@@ -37,11 +35,11 @@ function InformationSaDataListTable({ informations }) { //props
     };
     
     const [sessionUser, setSessionUser] = useState({});
-    const [infos, setInfos] = useState(null);
+    const [assets, setAssets] = useState(null);
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
-    const [product, setProduct] = useState(emptyProduct);
+    const [editAsset, setEditAsset] = useState(emptyAsset);
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
@@ -49,23 +47,23 @@ function InformationSaDataListTable({ informations }) { //props
     const dt = useRef(null);
 
     useEffect(() => {
-        if(useTestData) {
-            ProductService.getProducts().then((data) =>
-                setInfos(
-                    data
-                ));
-        }
-        else 
-            setInfos(informations);
+        // if(useTestData) {
+        //     ProductService.getProducts().then((data) =>
+        //         setInfos(
+        //             data
+        //         ));
+        // }
+        // else 
+            setAssets(givenAssets);
 
-    }, [informations]);
+    }, [givenAssets]);
 
     const formatCurrency = (value) => {
         return value?.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     };
 
     const openNew = () => {
-        setProduct(emptyProduct);
+        setEditAsset(emptyAsset);
         setSubmitted(false);
         setProductDialog(true);
     };
@@ -83,15 +81,15 @@ function InformationSaDataListTable({ informations }) { //props
         setDeleteProductsDialog(false);
     };
 
-    const saveProduct = () => {
+    const saveAsset = () => {
         setSubmitted(true);
 
-        if (product.name.trim()) {
-            let _products = [...informations];
-            let _product = { ...product };
+        if (editAsset.name.trim()) {
+            let _products = [...assets];
+            let _product = { ...editAsset };
 
-            if (product.entityId) {
-                const index = findIndexById(product.entityId);
+            if (editAsset.entityId) {
+                const index = findIndexById(editAsset.entityId);
 
                 _products[index] = _product;
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
@@ -102,36 +100,36 @@ function InformationSaDataListTable({ informations }) { //props
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
-            setInfos(_products);
+            setAssets(_products);
             setProductDialog(false);
-            setProduct(emptyProduct);
+            setEditAsset(emptyAsset);
         }
     };
 
     const editProduct = (product) => {
-        setProduct({ ...product });
+        setEditAsset({ ...product });
         setProductDialog(true);
     };
 
     const confirmDeleteProduct = (product) => {
-        setProduct(product);
+        setEditAsset(product);
         setDeleteProductDialog(true);
     };
 
     const deleteProduct = () => {
-        let _products = infos.filter((val) => val.entityId !== product.entityId);
+        let _products = assets.filter((val) => val.entityId !== editAsset.entityId);
 
-        setInfos(_products);
+        setAssets(_products);
         setDeleteProductDialog(false);
-        setProduct(emptyProduct);
+        setEditAsset(emptyAsset);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     };
 
     const findIndexById = (id) => {
         let index = -1;
 
-        for (let i = 0; i < infos.length; i++) {
-            if (infos[i].entityId === id) {
+        for (let i = 0; i < assets.length; i++) {
+            if (assets[i].entityId === id) {
                 index = i;
                 break;
             }
@@ -160,37 +158,37 @@ function InformationSaDataListTable({ informations }) { //props
     };
 
     const deleteSelectedProducts = () => {
-        let _products = infos.filter((val) => !selectedProducts.includes(val));
+        let _products = assets.filter((val) => !selectedProducts.includes(val));
 
-        setInfos(_products);
+        setAssets(_products);
         setDeleteProductsDialog(false);
         setSelectedProducts(null);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     };
 
     const onCategoryChange = (e) => {
-        let _product = { ...product };
+        let _product = { ...editAsset };
 
         _product['category'] = e.value;
-        setProduct(_product);
+        setEditAsset(_product);
     };
 
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
-        let _product = { ...product };
+        let _product = { ...editAsset };
 
         _product[`${name}`] = val;
 
-        setProduct(_product);
+        setEditAsset(_product);
     };
 
     const onInputNumberChange = (e, name) => {
         const val = e.value || 0;
-        let _product = { ...product };
+        let _product = { ...editAsset };
 
         _product[`${name}`] = val;
 
-        setProduct(_product);
+        setEditAsset(_product);
     };
 
     const leftToolbarTemplate = () => {
@@ -307,7 +305,7 @@ function InformationSaDataListTable({ informations }) { //props
     const productDialogFooter = (
         <React.Fragment>
             <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Save" icon="pi pi-check" onClick={saveProduct} />
+            <Button label="Save" icon="pi pi-check" onClick={saveAsset} />
         </React.Fragment>
     );
     const deleteProductDialogFooter = (
@@ -330,7 +328,7 @@ function InformationSaDataListTable({ informations }) { //props
                 <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} 
-                           value={infos} 
+                           value={assets} 
                            selection={selectedProducts} 
                            onSelectionChange={(e) => setSelectedProducts(e.value)}
                            dataKey="entityId"  
@@ -362,38 +360,38 @@ function InformationSaDataListTable({ informations }) { //props
             {/*</div>*/}
 
             <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.image} className="product-image block m-auto pb-3" />}
+                {editAsset.image && <img src={`https://primefaces.org/cdn/primereact/images/product/${editAsset.image}`} alt={editAsset.image} className="product-image block m-auto pb-3" />}
                 <div className="field">
                     <label htmlFor="name" className="font-bold">
                         Name
                     </label>
-                    <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                    {submitted && !product.name && <small className="p-error">Name is required.</small>}
+                    <InputText id="name" value={editAsset.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !editAsset.name })} />
+                    {submitted && !editAsset.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="field">
                     <label htmlFor="beschreibung" className="font-bold">
                         Description
                     </label>
-                    <InputTextarea id="beschreibung" value={product.beschreibung} onChange={(e) => onInputChange(e, 'beschreibung')} required rows={3} cols={20} />
+                    <InputTextarea id="beschreibung" value={editAsset.beschreibung} onChange={(e) => onInputChange(e, 'beschreibung')} required rows={3} cols={20} />
                 </div>
 
                 <div className="field">
                     <label className="mb-3 font-bold">Category</label>
                     <div className="formgrid grid">
                         <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
+                            <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={editAsset.category === 'Accessories'} />
                             <label htmlFor="category1">Accessories</label>
                         </div>
                         <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
+                            <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={editAsset.category === 'Clothing'} />
                             <label htmlFor="category2">Clothing</label>
                         </div>
                         <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
+                            <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={editAsset.category === 'Electronics'} />
                             <label htmlFor="category3">Electronics</label>
                         </div>
                         <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
+                            <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={editAsset.category === 'Fitness'} />
                             <label htmlFor="category4">Fitness</label>
                         </div>
                     </div>
@@ -404,13 +402,13 @@ function InformationSaDataListTable({ informations }) { //props
                         <label htmlFor="price" className="font-bold">
                             Price
                         </label>
-                        <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
+                        <InputNumber id="price" value={editAsset.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
                     </div>
                     <div className="field col">
                         <label htmlFor="quantity" className="font-bold">
                             Quantity
                         </label>
-                        <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
+                        <InputNumber id="quantity" value={editAsset.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
                     </div>
                 </div>
             </Dialog>
@@ -418,9 +416,9 @@ function InformationSaDataListTable({ informations }) { //props
             <Dialog visible={deleteProductDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {product && (
+                    {editAsset && (
                         <span>
-                            Are you sure you want to delete <b>{product.name}</b>?
+                            Are you sure you want to delete <b>{editAsset.name}</b>?
                         </span>
                     )}
                 </div>
@@ -429,7 +427,7 @@ function InformationSaDataListTable({ informations }) { //props
             <Dialog visible={deleteProductsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {product && <span>Are you sure you want to delete the selected products?</span>}
+                    {editAsset && <span>Are you sure you want to delete the selected products?</span>}
                 </div>
             </Dialog>
         </>

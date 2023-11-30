@@ -15,65 +15,32 @@ import * as Session from "next-auth/react";
 import Cookies from 'universal-cookie';
 import useAxiosAuth from "../../../../lib/hooks/useAxiosAuth";
 
-export default function InformationSaList({users }) {
+export default function InformationSaList({ params }) {
 
     const {data: session, status} = useSession();
     const axiosAuth = useAxiosAuth();
 
-    const [informations, setInformations] = useState({});
+    const [assets, setAssets] = useState({});
 
     const fetchPost = async () => {
         const res = await axiosAuth.get("/api/v1/asset/informations/");
 
         let informationArray = res.data;
         if (Array.isArray(informationArray)) {
-            setInformations(informationArray);
+            setAssets(informationArray);
+            isUpdated=true;
         }
     };
     
-    // const fetchPost = async () => {
-    //
-    //     // const response = await res.json();
-    //     // setPosts(response);
-    //     if (session) {
-    //         const informationService = new InformationService(session);
-    //
-    //         informationService.getAll().then(
-    //             (res) => {
-    //                 if (Array.isArray(res.data)) {
-    //                     setInfos(res.data);
-    //                 }
-    //             }
-    //         );
-    //     }
-    // };
-    
+    let isUpdated= false;
+
     useEffect(() => {
 
-            if (session) {
+            if (session && !isUpdated) {
                 fetchPost().then();
-                // let userService = new UserService(session);
-                // const informationService = new InformationService(session);
-                //
-                // informationService.getAll().then(
-                //     (res) => {
-                //         if (Array.isArray(res.data)) {
-                //             setInformations(res.data);
-                //         }
-                //     }
-                // );
             }
        //wait untill session!! sonst keine Abfrage!
     }, [session])
-        
-        // const informations = fetch("http://localhost:8080/api/v1/asset/informations/").then(
-        //     (res) => res.json()
-        // );
-        //
-        // const users = fetch("http://localhost:8080/api/v1/users/").then(
-        //     (res) => res.json()
-        // );
-    // }, session);
    
     if (session) {
     return (
@@ -93,7 +60,7 @@ export default function InformationSaList({users }) {
                             <div className="col-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <InformationSaListDataTable informations={informations}/>
+                                        <InformationSaListDataTable givenAssets={assets}/>
                                     </div>
                                 </div>
                             </div>
@@ -111,24 +78,24 @@ export default function InformationSaList({users }) {
 }
 
 
-export async function getServerSidePropsasync({ req, query, res }) {
-
-    const cookies = new Cookies(req?.headers?.cookie);
-    cookies.get("token")
-
-    cookies.set('test-cookie', 'true', {
-        httpOnly: true,
-    });
-
-    // Set the cookie in the response's headers
-    res.setHeader('Set-Cookie', cookies.getAll());
-    
-    return {
-        props: {
-            isRegistered: !!cookies.get('test-cookie'),
-        },
-    };
-}
+// export async function getServerSidePropsasync({ req, query, res }) {
+//
+//     const cookies = new Cookies(req?.headers?.cookie);
+//     cookies.get("token")
+//
+//     cookies.set('test-cookie', 'true', {
+//         httpOnly: true,
+//     });
+//
+//     // Set the cookie in the response's headers
+//     res.setHeader('Set-Cookie', cookies.getAll());
+//    
+//     return {
+//         props: {
+//             isRegistered: !!cookies.get('test-cookie'),
+//         },
+//     };
+// }
 //
 //     // this will contain the session object post verification
 //     let session

@@ -1,14 +1,9 @@
 "use client";
-import React, {useState, useEffect} from "react";
-import Link from "next/link";
-// import {MenuIcon} from "@heroicons/react/outline";
-// import {UserCircleIcon} from "@heroicons/react/solid";
+import React from "react";
 // import UserService from "/services/userService";
 import {signIn, signOut, useSession} from "next-auth/react";
-import {useRouter} from "next/navigation";
 // import {remove} from "/redux/userSlice";
 // import {useDispatch} from "react-redux";
-import useAxiosAuth from "lib/hooks/useAxiosAuth";
 
 // <!-- Global TopNav -->
 const AppTopNav = () => {
@@ -25,20 +20,15 @@ const AppTopNav = () => {
                     </a>
 
                     <div className="navbar-collapse collapse">
-                        {/*<a href="/user/me" className="navbar-text float-end ms-auto">{sessionUser?.name}</a>*/}
                         {session?.user ? (
                             <>
                                 <a href="/user/me"
                                    className="navbar-text float-end ms-auto"> {session.user.username}</a>
-                                {/*<button className="text-red-500" onClick={() => signOut()}>*/}
-                                {/*    Sign Out*/}
-                                {/*</button>*/}
                             </>
-                        ) : (
-                            <button className="text-green-600" onClick={() => signIn()}>
-                                Sign In
-                            </button>
-                        )}
+                        ) : 
+                            <>
+                            </>
+                        }
                         <ul className="navbar-nav px-2">
                             <li className="nav-item dropdown ms-lg-2">
                                 <a className="nav-link dropdown-toggle position-relative" href="#" id="alertsDropdown"
@@ -79,26 +69,19 @@ const AppTopNav = () => {
                                     <i className="align-middle fas fa-cog"></i>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <a className="dropdown-item" href="#"><i
-                                        className="align-middle me-1 fas fa-fw fa-user"></i> Einstellungen</a>
+                                    <a className="dropdown-item" href="#">
+                                        <i className="align-middle me-1 fas fa-fw fa-user"></i> Einstellungen
+                                    </a>
                                     <div className="dropdown-divider"></div>
-
-                                    {/*{ if (session) {*/}
-
                                     <a className="dropdown-item cursor-pointer"  
                                        onClick={() => {
                                            signOut({ callbackUrl: 'http://localhost:3000/login' });
                                        }}
                                         // dispatch(remove());
                                         // serverLogout();
-
-
-                                    >
-                                        <i
-                                            className="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i> Ausloggen
+                                        >
+                                        <i className="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i> Ausloggen
                                     </a>
-                                    {/*}*/}
-
                                 </div>
                             </li>
                         </ul>

@@ -27,20 +27,17 @@ function Login() {
   } = useForm();
   const onSubmit = async (data) => {
     await signIn("credentials", {
-      username: data.username, //TODO Username
+      username: data.username,  
       password: data.password,
       redirect: true,
       callbackUrl: "/asset/informationSa/list"
     })
   };
 
- 
-
-    if (session && status === "authenticated") {
+  if (session && status === "authenticated") {
     return (
         <>
           Signed in as {session.user.username} <br />
-
           <p
               className="btn btn-danger"
               onClick={() => {
@@ -50,15 +47,11 @@ function Login() {
                 logout();
               }}
           >
-            {/*<LogoutIcon className="w-5 h-5" />*/}
             <span>Logout</span>
           </p>
-          
-          {/*<button onClick={() => signOut()}>Sign out</button>*/}
         </>
     )
   }
-
 
   return (
       <>
@@ -137,8 +130,6 @@ function Login() {
                             {/*  <!-- <button type="submit" className="btn btn-lg btn-primary">Sign in</button> -->*/}
                           </div>
                         </form>
-                        {/*<ServerCookieExample />*/}
-
                       </div>
                     </div>
                   </div>
