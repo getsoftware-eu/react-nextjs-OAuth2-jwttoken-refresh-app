@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "lib/axios";
-import { signIn, useSession } from "next-auth/react";
+import {signIn, signOut, useSession} from "next-auth/react";
 
 export const useRefreshToken = () => {
   const { data: session } = useSession();
@@ -19,9 +19,20 @@ export const useRefreshToken = () => {
     });
 
     if (session) {
-      console.log("persist new accessToken:" + res.data.accessToken)
-      session.user.accessToken = res.data.accessToken;
-      // session.user.refreshToken = res.data.refreshToken;
+
+      //Anomal Html-Reject from server
+      if(res && res.data && (typeof res.data === 'string' || res.data instanceof String) && res.data.startsWith("<!DOCTYPE html>"))
+      {
+        res.status = 401;
+        res.statusText = "Jwt problem";
+        signOut({ callbackUrl: 'http://localhost:3000/login' }).then();
+      }
+      else{
+        console.log("persist new accessToken:" + res.data.accessToken)
+        session.user.accessToken = res.data.accessToken;
+        // session.user.refreshToken = res.data.refreshToken;
+      }
+ 
     }
     
     else signIn();
