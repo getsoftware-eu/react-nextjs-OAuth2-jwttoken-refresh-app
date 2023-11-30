@@ -22,7 +22,7 @@ export default function InformationSaList({ params }) {
 
     const [assets, setAssets] = useState({});
 
-    const fetchPost = async () => {
+    const getServerAsynchData = async () => {
         const res = await axiosAuth.get("/api/v1/asset/informations/");
 
         let informationArray = res.data;
@@ -37,7 +37,7 @@ export default function InformationSaList({ params }) {
     useEffect(() => {
 
             if (session && !isUpdated) {
-                fetchPost().then();
+                getServerAsynchData().then();
             }
        //wait untill session!! sonst keine Abfrage!
     }, [session])
