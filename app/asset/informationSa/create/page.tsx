@@ -70,7 +70,7 @@ function CreateInformation({ props }) {
     toast.promise(
         //TODO informationService.save(formData)
         axiosAuth
-        .post("/api/v1/asset/informations/" + "save", formData, {
+        .post("/api/v1/asset/informations/", formData, {
               headers: {
                 'Content-Type':'multipart/form-data',  
               },
