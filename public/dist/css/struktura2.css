@@ -1,0 +1,119 @@
+.content {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+}
+.header {
+    position: relative;
+    margin-bottom: 2rem;
+}
+.noDatatableFlashing {
+     /*prevent Flash of unstyled content*/
+    display: none;
+}
+
+.profileImage {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #004D3C;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    /*margin: 2rem 0;*/
+}
+
+.rowGroup {
+    background-color: #f8f9fa !important;
+}
+.rowGroup span {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/*.iconGreen{*/
+/*    !*color: green !important;*!*/
+/*}*/
+/*.iconYellow{*/
+/*    !*color: yellow !important;*!*/
+/*}*/
+.underlined{
+    text-decoration: underline;
+    font-weight: 600;
+}
+.сlosedAssetInList a {
+    /*background-color: #f8f9fa;*/
+    color: #3e4676;
+}
+th.zeroWidthIfEmpty, td.zeroWidthIfEmpty {
+    padding-left: 0;
+    padding-right: 0;
+    width: 0;
+}
+
+.disabledLink {
+    color: #adb5bd !important;
+    background: transparent !important;
+}
+
+.redColor {
+    color: rgb(220, 53, 69) !important;
+}
+
+.greenColor {
+    color: #28a745 !important;
+}
+
+.form-check-input.sbUeberschrieben{
+    border-width: 2px;
+    border-color: rgb(220, 53, 69);
+}
+
+@font-face {
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style : normal;
+    src : url("../fonts/fontawesome-webfont.eot?v=4.3.0");
+    src : url("../fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"),
+    url("../fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"),
+    url("../fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"),
+    url("../fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype")
+    /*,url("../fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");*/
+    , url("../fonts/ionicons.woff") format("woff"),
+    url("../fonts/ionicons.woff2") format("woff2"),
+    url("../fonts/ionicons.ttf") format("ttf");
+}
+
+.sbOverwrite a.sbLinkSubIconWrapper.collapsed::after {
+    border: none!important;
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f105"!important; /* open icon */
+    vertical-align: 0; /* to center vertically */
+    padding-top: 5px;
+}
+
+.sbOverwrite .sbLinkSubIconWrapper:not(.sidebar-link)::after {
+    border: none!important;
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f105"!important;  /* hidden icon */
+    vertical-align: 0; /* to center vertically */
+    visibility: hidden;
+    padding-top: 5px;
+}
+
+.sbOverwrite a.sbLinkSubIconWrapper.sidebar-link:not(.collapsed)::after {
+    border: none!important;
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f107"!important; /* close icon */
+    vertical-align: 0; /* to center vertically */
+    /*position: absolute;*/
+    /*right: 5px;*/
+    /*top: 5px;*/
+    padding-top: 5px;
+}
+
+.div-th {
+    font-weight: 700
+}

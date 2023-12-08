@@ -1,14 +1,26 @@
-import "styles/css/primereact/lara-light-indigo/mytheme.css";
-import "styles/css/primereact/prime-react-over.css";
+// import "styles/css/primereact/lara-light-indigo/mytheme.css";
+// import "styles/css/primereact/prime-react-over.css";
 import "styles/spark3/modern.scss";
 import "styles/struktura2.scss";
+//eugen test
+// import "public/dist/css/modern.css";
+// import "public/dist/css/struktura2.css";
+// import '@fortawesome/fontawesome-free/css/all.css'
+// import 'public/dist/css/_select2.scss'
+//eugen end test
 // import "styles/css/fa-solid-900.fd0b155c.woff2";
 // import "styles/css/fa-regular-400.3580b4a9.woff2";
 import { ReactNode } from "react";
 import AppTopNav from "./AppTopNav";
 import Providers from "./Providers";
-// import {Head} from "next/document";
+import Head from "next/head";
 // import { Html, Head, Main, NextScript } from 'next/document';
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+}
+
 
 interface IProps {
   children: ReactNode;
@@ -21,7 +33,9 @@ export default function RootLayout({ children }: IProps) {
         <Providers>
             {/*<div className="wrapper">*/}
             {/*    <AppTopNav />*/}
-             <div className={"  h-screen "}>{children}</div>
+            {/*     <div className={"eugenTopDiv"}>*/}
+                 {children}
+             {/*    </div>*/}
             {/*</div>*/}
         </Providers>
 
