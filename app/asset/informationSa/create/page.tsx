@@ -172,7 +172,7 @@ function CreateInformation({ props }) {
                           {/*Eugen: inside form submit*/}
                           <button type="submit" className="btn btn-primary" ref={formBtnRef}>speichern</button>
 
-                          <a className="btn btn-light" href="/asset/informationSa/list" >zurück</a>
+                          <a className="btn btn-light ms-1" href="/asset/informationSa/list" >zurück</a>
 
                         </form>
                       </div>

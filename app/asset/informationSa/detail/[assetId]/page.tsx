@@ -342,7 +342,7 @@ function InformationDetail({ params }) {
                           {/*Eugen: inside form submit*/}
                           <button type="submit" className="btn btn-primary me-1" ref={formBtnRef}>speichern</button>
 
-                          <a className="btn btn-light" href="/asset/informationSa/list">zurück</a>
+                          <a className="btn btn-light ms-1" href="/asset/informationSa/list">zurück</a>
 
                         </form>
                       </div>

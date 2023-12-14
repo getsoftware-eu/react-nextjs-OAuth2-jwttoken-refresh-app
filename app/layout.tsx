@@ -1,7 +1,4 @@
-// import "styles/css/primereact/lara-light-indigo/mytheme.css";
-// import "styles/css/primereact/prime-react-over.css";
 import "styles/spark3/modern.scss";
-import "styles/struktura2.scss";
 //eugen test
 // import "public/dist/css/modern.css";
 // import "public/dist/css/struktura2.css";

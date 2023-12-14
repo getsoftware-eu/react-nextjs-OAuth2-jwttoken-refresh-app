@@ -98,3 +98,8 @@
 @import "5-vendor/select2";
 @import "5-vendor/toastr";
 @import "5-vendor/smartwizard";
+@import "5-vendor/_primereact-lara-light-indigo_theme.css";
+
+// struktura custom overwrite styles
+@import "6-struktura/_prime-react-over.css";
+@import "6-struktura/struktura2";
