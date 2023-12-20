@@ -34,7 +34,6 @@ function InformationSaDataListTable({ givenAssets }) { //props
         inventoryStatus: 'INSTOCK'
     };
     
-    const [sessionUser, setSessionUser] = useState({});
     const [assets, setAssets] = useState(null);
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
