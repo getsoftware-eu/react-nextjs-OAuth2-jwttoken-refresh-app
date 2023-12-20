@@ -6,7 +6,7 @@ import React, {useRef, useState} from "react";
 import {useForm} from "react-hook-form";
 // import {toast} from "react-hot-toast";
 import SideNav from "/components/common/nav/SideNav";
-import AppTopNav from "../../../AppTopNav";
+import AppTopNav from "../../../nav/AppTopNav";
 import {H1} from "/components/common/Сontent";
 import FooterNav from "/components/common/nav/FooterNav";
 import useAxiosAuth from "../../../../lib/hooks/useAxiosAuth";

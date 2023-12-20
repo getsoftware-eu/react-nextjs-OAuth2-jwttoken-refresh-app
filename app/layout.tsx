@@ -1,38 +1,68 @@
+// import "styles/css/primereact/lara-light-indigo/mytheme.css";
+// import "styles/css/primereact/prime-react-over.css";
 import "styles/spark3/modern.scss";
-//eugen test
-// import "public/dist/css/modern.css";
-// import "public/dist/css/struktura2.css";
-// import '@fortawesome/fontawesome-free/css/all.css'
-// import 'public/dist/css/_select2.scss'
-//eugen end test
-// import "styles/css/fa-solid-900.fd0b155c.woff2";
-// import "styles/css/fa-regular-400.3580b4a9.woff2";
-import { ReactNode } from "react";
-import AppTopNav from "./AppTopNav";
+import {Metadata} from 'next'
+import {ReactNode} from "react";
 import Providers from "./Providers";
-import Head from "next/head";
+// import App from './App';
+// import {Head} from "next/document";
 // import { Html, Head, Main, NextScript } from 'next/document';
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-    viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-}
 
 
-interface IProps {
+interface RootLayoutProps {
   children: ReactNode;
 }
-export default function RootLayout({ children }: IProps) {
+
+/**
+ * 
+ * a new app/layout.tsx file inside the app directory. This is a root layout that will apply to all routes inside app.
+ * The root layout is a Server Component by default and can not be set to a Client Component.
+ * Only the root layout can contain <html> and <body> tags.
+ * 
+ * for sub-folders (/dashboard):
+ * Use layout.js to define UI that is shared across multiple routes.
+ * 
+ * The root layout replaces the pages/_app.tsx and pages/_document.tsx files.
+ * pages/_app.js and pages/_document.js have been replaced with a single app/layout.js root layout
+ * @param children
+ * @constructor
+ */
+
+export const metadata: Metadata = {
+    title: 'Struktura',
+    description: 'Welcome to Struktura',
+    viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+    openGraph: {
+        type: "website",
+        title: "Sakai by PrimeReact | Free Admin Template for NextJS",
+        url: "https://www.primefaces.org/sakai-react",
+        description:
+            "The ultimate collection of design-agnostic, flexible and accessible React UI Components.",
+        images: ["https://www.primefaces.org/static/social/sakai-nextjs.png"],
+        ttl: 604800,
+    },
+    icons: {
+        icon: "/favicon.ico",
+    },
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
+  // <PrimeReactProvider value={{ unstyled: true, pt: Bootstrap_PT }}>
     <html lang="de" suppressHydrationWarning>
-      {/*<Head />*/}
+        {/*<head>*/}
+        {/*    <link*/}
+        {/*        id="theme-css"*/}
+        {/*        href={`/styles/spark3/modern.scss`}*/}
+        {/*        rel="stylesheet"*/}
+        {/*    ></link>*/}
+        {/*</head>*/}
       <body>
         <Providers>
             {/*<div className="wrapper">*/}
-            {/*    <AppTopNav />*/}
-            {/*     <div className={"eugenTopDiv"}>*/}
-                 {children}
-             {/*    </div>*/}
+            {/*    <PrimeReactProvider value={{ unstyled: true }}>*/}
+             <div className={"  h-screen "}>{children}</div>
+                {/*</PrimeReactProvider>*/}
             {/*</div>*/}
         </Providers>
 
@@ -65,5 +95,6 @@ export default function RootLayout({ children }: IProps) {
       
       </body>
     </html>
+  // </PrimeReactProvider>
   );
 }
