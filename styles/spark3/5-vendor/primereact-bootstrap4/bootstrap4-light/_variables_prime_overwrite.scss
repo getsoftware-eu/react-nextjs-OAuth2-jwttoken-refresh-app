@@ -1,16 +1,19 @@
+//eugen prime overwrite
+//@import "styles/spark3/1-variables/app";
+
 $colors: (
-    "blue": #0d6efd,
-    "green": #198754,
-    "yellow": #ffc107,
-    "cyan": #0dcaf0,
-    "pink": #d63384,
-    "indigo": #6610f2,
-    "teal": #20c997,
-    "orange": #fd7e14,
-    "bluegray": #7C8EA7,
-    "purple": #6f42c1,
-    "red": #DC3545,
-    "primary": $primaryColor
+        "blue": #0d6efd,
+        "green": #198754,
+        "yellow": #ffc107,
+        "cyan": #0dcaf0,
+        "pink": #d63384,
+        "indigo": #6610f2,
+        "teal": #20c997,
+        "orange": #fd7e14,
+        "bluegray": #7C8EA7,
+        "purple": #6f42c1,
+        "red": #DC3545,
+        "primary": $primaryColor
 ) !default;
 
 //reused color variables
@@ -25,13 +28,16 @@ $shade700:#495057 !default;              //input text color
 $shade800:#343a40 !default;              //unused
 $shade900:#212529 !default;              //text color
 
-//global
-$fontFamily:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$fontSize:1rem !default;
-$fontWeight:normal !default;
-$textColor:$shade900 !default;
-$textSecondaryColor:$shade600 !default;
-$borderRadius:4px !default;
+//global 
+//overwrite from spark: '1-variables/_app.scss'
+
+$fontFamily: $font-family-sans-serif; //-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$fontSize: $font-size-base; //1rem !default;
+$fontWeight: $font-weight-normal; //normal !default;
+$textColor: $body-color; //$shade900 !default;
+$textSecondaryColor: $body-color; //$shade600 !default;
+$borderRadius: 3.75px !default; //4px !default;
+
 $transitionDuration:.15s !default;
 $formElementTransition:background-color $transitionDuration, border-color $transitionDuration, box-shadow $transitionDuration !default;
 $actionIconTransition:box-shadow $transitionDuration !default;
@@ -43,6 +49,9 @@ $disabledOpacity:.65 !default;
 $maskBg:rgba(0, 0, 0, 0.4) !default;
 $loadingIconFontSize:2rem !default;
 $errorColor:#dc3545 !default;
+
+//checkbox
+$checkboxActiveHoverBg: #3b7ddd;
 
 //scale
 $scaleSM:0.875 !default;
@@ -825,54 +834,53 @@ $imagePreviewActionIconHeight:3rem !default;
 $imagePreviewActionIconFontSize:1.5rem !default;
 $imagePreviewActionIconBorderRadius:50% !default;
 
-//eugen: root relocato to spark3
+//eugen: root css relocate to spark3 scss
 :root {
-    font-family: $font-family-sans-serif;// -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    --font-family: $font-family-sans-serif;// -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    --surface-a:#{$shade000};
-    --surface-b:#{$shade100};
-    --surface-c:#{$shade200};
-    --surface-d:#{$shade300};
-    --surface-e:#{$shade000};
-    --surface-f:#{$shade000};
-    --text-color:#{$shade900};
-    --text-color-secondary:#{$shade600};
-    --primary-color:#{$primaryColor};
-    --primary-color-text:#{$primaryTextColor};
-    --surface-0: #ffffff;
-    --surface-50: #f9fafb;
-    --surface-100: #f8f9fa;
-    --surface-200: #e9ecef;
-    --surface-300: #dee2e6;
-    --surface-400: #ced4da;
-    --surface-500: #adb5bd;
-    --surface-600: #6c757d;
-    --surface-700: #495057;
-    --surface-800: #343a40;
-    --surface-900: #212529;
-    --gray-50: #f9fafb;
-    --gray-100: #f8f9fa;
-    --gray-200: #e9ecef;
-    --gray-300: #dee2e6;
-    --gray-400: #ced4da;
-    --gray-500: #adb5bd;
-    --gray-600: #6c757d;
-    --gray-700: #495057;
-    --gray-800: #343a40;
-    --gray-900: #212529;
-    --content-padding:#{$panelContentPadding};
-    --inline-spacing:#{$inlineSpacing};
-    --border-radius:#{$borderRadius};
-    --surface-ground:#efefef;
-    --surface-section:#ffffff;
-    --surface-card:#ffffff;
-    --surface-overlay:#ffffff;
-    --surface-border:#dee2e6;
-    --surface-hover:#e9ecef;
-    --focus-ring: #{$focusShadow};
-    --maskbg: #{$maskBg};
-    --highlight-bg: #{$highlightBg};
-    --highlight-text-color: #{$highlightTextColor};
-    color-scheme: light;
+  font-family: $font-family-sans-serif;// -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family: $font-family-sans-serif;// -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --surface-a:#{$shade000};
+  --surface-b:#{$shade100};
+  --surface-c:#{$shade200};
+  --surface-d:#{$shade300};
+  --surface-e:#{$shade000};
+  --surface-f:#{$shade000};
+  --text-color:#{$body-color};
+  --text-color-secondary:#{$body-color};
+  --primary-color:#{$primaryColor};
+  --primary-color-text:#{$primaryTextColor};
+  --surface-0: #ffffff;
+  --surface-50: #f9fafb;
+  --surface-100: #f8f9fa;
+  --surface-200: #e9ecef;
+  --surface-300: #dee2e6;
+  --surface-400: #ced4da;
+  --surface-500: #adb5bd;
+  --surface-600: #6c757d;
+  --surface-700: #495057;
+  --surface-800: #343a40;
+  --surface-900: #212529;
+  --gray-50: #f9fafb;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --content-padding:#{$panelContentPadding};
+  --inline-spacing:#{$inlineSpacing};
+  --border-radius:#{$borderRadius};
+  --surface-ground:#efefef;
+  --surface-section:#ffffff;
+  --surface-card:#ffffff;
+  --surface-overlay:#ffffff;
+  --surface-border:#dee2e6;
+  --surface-hover:#e9ecef;
+  --focus-ring: #{$focusShadow};
+  --maskbg: #{$maskBg};
+  --highlight-bg: #{$highlightBg};
+  --highlight-text-color: #{$highlightTextColor};
+  color-scheme: light;
 }
-

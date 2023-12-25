@@ -4,7 +4,8 @@ $primaryDarkColor: #0069d9 !default;
 $primaryDarkerColor: #0062cc !default;
 $primaryTextColor: #ffffff !default;
 
-$highlightBg: $primaryColor !default;
+$highlightBg:  rgba($primaryColor, 0) !default;
 $highlightTextColor: $primaryTextColor !default;
 
-@import '../_variables_light';
+@import '../_variables_prime_overwrite';
+//@import '../_variables_light';
