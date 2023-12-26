@@ -2,23 +2,23 @@
 //@import "styles/spark3/1-variables/app";
 
 $colors: (
-        "blue": #0d6efd,
-        "green": #198754,
-        "yellow": #ffc107,
-        "cyan": #0dcaf0,
-        "pink": #d63384,
-        "indigo": #6610f2,
-        "teal": #20c997,
-        "orange": #fd7e14,
+        "blue": #3b7ddd, //--bs-blue
+        "green": #28a745, //--bs-green
+        "yellow": #ffc107, //--bs-yellow
+        "cyan": #17a2b8, //--bs-cyan
+        "pink": #e83e8c, //--bs-pink
+        "indigo": #6610f2,//--bs-indigo
+        "teal": #20c997,//--bs-teal
+        "orange": #fd7e14,//--bs-orange
         "bluegray": #7C8EA7,
-        "purple": #6f42c1,
-        "red": #DC3545,
+        "purple": #6f42c1,//--bs-purple
+        "red": #dc3545, //--bs-red:
         "primary": $primaryColor
 ) !default;
 
 //reused color variables
 $shade000:#ffffff !default;              //surface
-$shade100:transparent !default;              //header background
+$shade100:transparent !default;          //header background
 $shade200:#e9ecef !default;              //hover background
 $shade300:#dee2e6 !default;              //border, divider
 $shade400:rgb(222, 226, 230) !default;   //input border
@@ -221,8 +221,8 @@ $linkButtonTextHoverDecoration:underline !default;
 $linkButtonFocusShadow:0 0 0 0.2rem $focusOutlineColor !default;
 
 //checkbox
-$checkboxWidth:20px !default;
-$checkboxHeight:20px !default;
+$checkboxWidth:15px !default; // 20px !default;
+$checkboxHeight:15px !default; // 20px !default;
 $checkboxBorder:1px solid $shade400 !default;
 $checkboxIconFontSize:14px !default;
 $checkboxActiveBorderColor:$primaryColor !default;
@@ -353,7 +353,7 @@ $panelHeaderBorder: 0 none !default; //1px solid $shade300 !default;
 $panelHeaderBg:$shade100 !default;
 $panelHeaderTextColor:$shade900 !default;
 $panelHeaderFontWeight:600 !default;
-$panelHeaderPadding:1rem 1.25rem !default;
+$panelHeaderPadding:0rem 0rem !default; //1rem 1.25rem !default;
 $panelToggleableHeaderPadding:.5rem 1.25rem !default;
 
 $panelHeaderHoverBg:$shade200 !default;
@@ -473,11 +473,11 @@ $paginatorElementPadding:0 !default;
 
 //table
 $tableHeaderBorder:solid #dee2e6 !default;
-$tableHeaderBorderWidth:1px 0 0 0 !default;
+$tableHeaderBorderWidth: 0 !default; //1px 0 0 0 !default;
 $tableHeaderBg:$shade100 !default;
 $tableHeaderTextColor:$shade900 !default;
 $tableHeaderFontWeight:600 !default;
-$tableHeaderPadding:1rem 1rem !default;
+$tableHeaderPadding: 0rem 0rem !default; //1rem 1rem !default;
 
 $tableHeaderCellPadding:1rem 1rem !default;
 $tableHeaderCellBg:$shade000 !default;
@@ -838,17 +838,17 @@ $imagePreviewActionIconBorderRadius:50% !default;
 
 //eugen: root css relocate to spark3 scss
 :root {
-  --bs-emphasis-color: #3e4676;
-  //font-family: $font-family-sans-serif;// -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  //--font-family: $font-family-sans-serif;// -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --bs-emphasis-color: rgb(62, 70, 118);
+  font-family: $font-family-sans-serif;// -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family: $font-family-sans-serif;// -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --surface-a:#{$shade000};
   --surface-b:#{$shade100};
   --surface-c:#{$shade200};
   --surface-d:#{$shade300};
   --surface-e:#{$shade000};
   --surface-f:#{$shade000};
-  //--text-color:#{$body-color};
-  //--text-color-secondary:#{$body-color};
+  --text-color:#{$body-color};
+  --text-color-secondary:#{$body-color};
   --primary-color:#{$primaryColor};
   --primary-color-text:#{$primaryTextColor};
   --surface-0: #ffffff;
@@ -862,6 +862,7 @@ $imagePreviewActionIconBorderRadius:50% !default;
   --surface-700: #495057;
   --surface-800: #343a40;
   --surface-900: #212529;
+  //eu bs identical:
   --gray-50: #f9fafb;
   --gray-100: #f8f9fa;
   --gray-200: #e9ecef;

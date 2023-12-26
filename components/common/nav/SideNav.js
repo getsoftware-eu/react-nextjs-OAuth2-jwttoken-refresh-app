@@ -15,7 +15,7 @@ function SideNav(message, error) {
         <>
             <nav id="sidebar" className="sidebar">
                 <a className="sidebar-brand" href="/">
-                    <img src="/img/samson2.png" width="26" height="26" alt="GovRiCo"/>&nbsp;GovRiCo
+                    <img src="/img/samson2.png" width="26" height="26" alt="GovRiCo" className="me-2"/>GovRiCo
                 </a>
                 <div className="sidebar-content">
                     <ul className="sidebar-nav mt-2">
