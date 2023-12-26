@@ -324,7 +324,10 @@ function InformationSaDataListTable({ givenAssets }) { //props
         <>
             <Toast ref={toast} />
             {/*<div className="card">*/}
-                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                <Toolbar 
+                    // className="mb-4" 
+                         left={leftToolbarTemplate} 
+                         right={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} 
                            value={assets} 

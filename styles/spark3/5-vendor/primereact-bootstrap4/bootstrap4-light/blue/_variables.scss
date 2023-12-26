@@ -1,3 +1,4 @@
+//basic theme variables
 $primaryLightColor: rgba(38,143,255,.5) !default;
 $primaryColor: #007bff !default;
 $primaryDarkColor: #0069d9 !default;
@@ -6,6 +7,11 @@ $primaryTextColor: #ffffff !default;
 
 $highlightBg:  rgba($primaryColor, 0) !default;
 $highlightTextColor: $primaryTextColor !default;
+
+//overwrite prime: components > data > datatables
+$tableHeaderCellFontWeight: 700 !default;
+$tableHeaderCellTextHoverColor: rgb(62, 70, 118);
+$tableHeaderCellIconColor: rgb(222, 226, 230);
 
 @import '../_variables_prime_overwrite';
 //@import '../_variables_light';

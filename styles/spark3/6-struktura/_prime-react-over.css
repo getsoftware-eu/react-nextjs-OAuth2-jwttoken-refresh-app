@@ -220,7 +220,7 @@
 /*    }*/
 /*}*/
 
-/*!*Eugen*!*/
+/*Eugen*/
 
 /*.p-datatable .p-datatable-header, .p-toolbar{*/
 /*    background-color: transparent;*/
@@ -232,39 +232,39 @@
 /*    margin-bottom: 0 !important;*/
 /*}*/
 
-/*!*.p-checkbox .p-checkbox-box {*!*/
-/*!*    -bs-form-check-bg: #fff;*!*/
-/*!*    color-adjust: exact;*!*/
-/*!*    -webkit-appearance: none;*!*/
-/*!*    -moz-appearance: none;*!*/
-/*!*    appearance: none;*!*/
-/*!*    background-color: var(--bs-form-check-bg);*!*/
-/*!*    background-image: var(--bs-form-check-bg-image);*!*/
-/*!*    background-position: 50%;*!*/
-/*!*    background-repeat: no-repeat;*!*/
-/*!*    background-size: contain;*!*/
-/*!*    border: var(--bs-border-width) solid var(--bs-border-color);*!*/
-/*!*    height: 1em;*!*/
-/*!*    margin-top: 0.25em;*!*/
-/*!*    -webkit-print-color-adjust: exact;*!*/
-/*!*    print-color-adjust: exact;*!*/
-/*!*    vertical-align: top;*!*/
-/*!*    width: 1em;*!*/
-/*!*    border-radius: 4px;*!*/
-/*!*}*!*/
-
-/*.p-datatable-header {*/
-/*    border-width: 0 !important;*/
-/*    padding:0 !important;*/
+/*.p-checkbox .p-checkbox-box {*/
+/*    -bs-form-check-bg: #fff;*/
+/*    color-adjust: exact;*/
+/*    -webkit-appearance: none;*/
+/*    -moz-appearance: none;*/
+/*    appearance: none;*/
+/*    background-color: var(--bs-form-check-bg);*/
+/*    background-image: var(--bs-form-check-bg-image);*/
+/*    background-position: 50%;*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: contain;*/
+/*    border: var(--bs-border-width) solid var(--bs-border-color);*/
+/*    height: 1em;*/
+/*    margin-top: 0.25em;*/
+/*    -webkit-print-color-adjust: exact;*/
+/*    print-color-adjust: exact;*/
+/*    vertical-align: top;*/
+/*    width: 1em;*/
+/*    border-radius: 4px;*/
 /*}*/
 
-/*table.p-datatable-table{*/
-/*    */
-/*}*/
+.p-datatable-header {
+    border-width: 0 !important;
+    padding:0 !important;
+}
 
-/*thead.p-datatable-thead {*/
-/*    */
-/*}*/
+table.p-datatable-table{
+    
+}
+
+thead.p-datatable-thead {
+    
+}
 
 /*th.p-sortable-column, th.p-sortable-column.p-highlight, th.p-selection-column {*/
 /*    color: inherit;*/
@@ -276,14 +276,18 @@
 /*    color: inherit;*/
 /*}*/
 
-/*tbody.p-datatable-tbody{*/
-/*    */
-/*}*/
+tbody.p-datatable-tbody{
+    
+}
 
-/*tr.p-selectable-row{*/
-/*    */
-/*}*/
+tr.p-selectable-row{
+    
+}
 
-/*td.p-selection-column{*/
-/*    */
+td.p-selection-column{
+    
+}
+
+/*.p-datatable-thead > tr > td {*/
+/*    all: unset;*/
 /*}*/

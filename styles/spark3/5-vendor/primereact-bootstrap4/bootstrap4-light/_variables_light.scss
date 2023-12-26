@@ -23,7 +23,7 @@ $shade500:#adb5bd !default;              //unused
 $shade600:#6c757d !default;              //text secondary color
 $shade700:#495057 !default;              //input text color
 $shade800:#343a40 !default;              //unused
-$shade900:#212529 !default;              //text color
+$shade900:#3e4676 !default;              //text color
 
 //global
 $fontFamily:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
@@ -340,11 +340,11 @@ $inputSwitchHandleOnBg:$shade000 !default;
 
 //panel
 $panelHeaderBorderColor: $shade300 !default;
-$panelHeaderBorder:1px solid $shade300 !default;
+$panelHeaderBorder: 0 none !default; //1px solid $shade300 !default;
 $panelHeaderBg:$shade100 !default;
 $panelHeaderTextColor:$shade900 !default;
 $panelHeaderFontWeight:600 !default;
-$panelHeaderPadding:1rem 1.25rem !default;
+$panelHeaderPadding:0px !default; //1rem 1.25rem !default;
 $panelToggleableHeaderPadding:.5rem 1.25rem !default;
 
 $panelHeaderHoverBg:$shade200 !default;
