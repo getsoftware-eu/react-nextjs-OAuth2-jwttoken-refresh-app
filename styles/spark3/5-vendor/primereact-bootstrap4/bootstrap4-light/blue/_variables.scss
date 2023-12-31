@@ -1,0 +1,17 @@
+//basic theme variables
+$primaryLightColor: rgba(38,143,255,.5) !default;
+$primaryColor: #3b7ddd !default; //--bs-primary:
+$primaryDarkColor: #0069d9 !default;
+$primaryDarkerColor: #0062cc !default;
+$primaryTextColor: #ffffff !default;
+
+$highlightBg:  rgba($primaryColor, 0) !default;
+$highlightTextColor: $primaryTextColor !default;
+
+//overwrite prime: components > data > datatables
+$tableHeaderCellFontWeight: 700 !default;
+$tableHeaderCellTextHoverColor: rgb(62, 70, 118);
+$tableHeaderCellIconColor: rgb(222, 226, 230);
+
+@import '../_variables_bs5_spark_ov';
+//@import '../_variables_bs4_light';

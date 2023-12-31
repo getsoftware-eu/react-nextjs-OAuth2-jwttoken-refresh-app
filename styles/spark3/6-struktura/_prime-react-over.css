@@ -1,0 +1,44 @@
+.p-selection-column .p-component.p-checkbox {
+    vertical-align: inherit;
+    /*all:unset;*/
+}
+
+/*.p-datatable .p-sortable-column-icon::before {*/
+/*    content: "";*/
+/*    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3E%3C/svg%3E");*/
+/*}*/
+
+/*.form-check-input:checked[type=checkbox] {*/
+/*    --bs-form-check-bg-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3E%3C/svg%3E")*/
+/*}*/
+
+.pi-sort-alt:before {
+    /*content: "\e99e";*/
+    content: "\f105"!important; /* open icon */
+}
+
+.pi-check:before {
+    /*content: "\e909";*/
+    content: "\f105"!important; /* open icon */
+}
+
+table.p-datatable-table{
+    
+}
+
+thead.p-datatable-thead {
+    
+}
+
+
+tbody.p-datatable-tbody{
+    
+}
+
+tr.p-selectable-row{
+    
+}
+
+td.p-selection-column{
+    
+}

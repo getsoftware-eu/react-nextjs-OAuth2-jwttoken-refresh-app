@@ -67,14 +67,14 @@
 @import "~@fortawesome/fontawesome-free/scss/solid";
 //@import "~apexcharts/src/assets/apexcharts";
 //@import "~bootstrap-daterangepicker/daterangepicker"; //needs jquery moment
-//@import "~datatables.net-bs5/css/dataTables.bootstrap5";
+//@import "~datatables.net-bs5/css/dataTables.bootstrap5"; //required to style DataTables library for jQuery with styling for Bootstrap5.
 //@import "~datatables.net-buttons-bs5/css/buttons.bootstrap5";
 //@import "~datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5";
 //@import "~datatables.net-responsive-bs5/css/responsive.bootstrap5";
-//@import "~dragula/dist/dragula";
+//@import "~dragula/dist/dragula"; //drag and drop in prozesses, no jquery dep
 //@import "~fullcalendar/main";
-//@import "~ionicons/dist/scss/ionicons";
-//@import "~jsvectormap/dist/css/jsvectormap";
+@import "~ionicons/dist/scss/ionicons";
+//@import "~jsvectormap/dist/css/jsvectormap";  //aren't using jQuery anymore
 //@import "~quill/dist/quill.bubble"; //text editor
 //@import "~quill/dist/quill.snow"; //text editor
 
@@ -89,12 +89,20 @@
 //@import "~toastr/toastr"; //Notification popup on save-action
 
 // 3rd party plugin styles
-//@import "5-vendor/datatables-select";
-//@import "5-vendor/datetimepicker";
-//@import "5-vendor/fullcalendar";
+@import "5-vendor/datatables-select";
+@import "5-vendor/datetimepicker";
+@import "5-vendor/fullcalendar";
 @import "5-vendor/highlight";
-//@import "5-vendor/ion-icons";
+@import "5-vendor/ion-icons";
 @import "5-vendor/quill";
-//@import "5-vendor/select2";
-//@import "5-vendor/toastr";
-//@import "5-vendor/smartwizard";
+@import "5-vendor/select2";
+@import "5-vendor/toastr";
+@import "5-vendor/smartwizard";
+//@import "5-vendor/_primereact-lara-light-indigo_theme.css";
+//@import "../primereact/themes/lara/lara-light/indigo/theme.scss";
+//@import "../primereact/themes/mytheme/theme.scss";
+@import "5-vendor/primereact-bootstrap4/bootstrap4-light/blue/theme";
+
+// struktura custom overwrite styles
+@import "6-struktura/_prime-react-over.css";
+@import "6-struktura/struktura2";

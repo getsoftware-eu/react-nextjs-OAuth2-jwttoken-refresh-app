@@ -11,6 +11,11 @@ import { useForm } from "react-hook-form";
 // import CookieExample from '../components/common/cookies/CookieExample';
 // import ServerCookieExample from '../components/common/cookies/ServerCookieExample';
 
+/**
+ * Use page.js to define UI unique to a route.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Login() {
 
   const { data: session, status } = useSession()

@@ -3,7 +3,7 @@ import {H1} from "/components/common/Сontent";
 import React, {useEffect, useState} from "react";
 import AssetSaListPrimeReactDataTable from "/components/asset/information/sa/AssetSaListPrimeReactDataTable";
 import SideNav from "/components/common/nav/SideNav";
-import AppTopNav from "../../../AppTopNav";
+import AppTopNav from "../../../nav/AppTopNav";
 import FooterNav from "/components/common/nav/FooterNav";
 // import UserService from "/services/userService";
 import {useSession} from "next-auth/react";

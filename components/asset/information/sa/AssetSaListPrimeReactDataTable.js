@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { classNames } from 'primereact/utils';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-// import { ProductService } from '@/services/productService';
-import { Toast } from 'primereact/toast';
-import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
-import { Rating } from 'primereact/rating';
-import { Toolbar } from 'primereact/toolbar';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { RadioButton } from 'primereact/radiobutton';
-import { InputNumber } from 'primereact/inputnumber';
-import { Dialog } from 'primereact/dialog';
-import { InputText } from 'primereact/inputtext';
-import { Tag } from 'primereact/tag';
+import React, {useEffect, useRef, useState} from 'react';
+import {classNames} from 'primereact/utils';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {Toast} from 'primereact/toast';
+import {Button} from 'primereact/button';
+import {Rating} from 'primereact/rating';
+import {Toolbar} from 'primereact/toolbar';
+import {InputTextarea} from 'primereact/inputtextarea';
+import {RadioButton} from 'primereact/radiobutton';
+import {InputNumber} from 'primereact/inputnumber';
+import {Dialog} from 'primereact/dialog';
+import {InputText} from 'primereact/inputtext';
 import {useSession} from "next-auth/react";
 import Link from "next/link";
 
@@ -28,13 +25,12 @@ function InformationSaDataListTable({ givenAssets }) { //props
         saStatus: '',
         sbStatus: '',
         category: null,
-        price: 0,
-        quantity: 0,
-        rating: 0,
+        ownerId: 0,
+        vertreterId: 0,
+        editorId: 0,
         inventoryStatus: 'INSTOCK'
     };
     
-    const [sessionUser, setSessionUser] = useState({});
     const [assets, setAssets] = useState(null);
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
@@ -226,14 +222,14 @@ function InformationSaDataListTable({ givenAssets }) { //props
             </div>
             
             <div className="col-auto">
-            <a href="#" title="Datenexport" className="btn btn-light" onClick={exportCSV}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                     className="feather feather-download align-middle">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
+                <a href="#" title="Datenexport" className="btn btn-light" onClick={exportCSV}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                         className="feather feather-download align-middle">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
                 </a>
             </div>
         </div>
@@ -265,6 +261,11 @@ function InformationSaDataListTable({ givenAssets }) { //props
     const saStatusBodyTemplate = (rowData) => {
         //Ask Dima: return <Tag value={rowData.saStatus} severity={getSaStatus(rowData)}></Tag>;
         return getSaStatus(rowData);
+    };   
+    
+    const editorBodyTemplate = (rowData) => {
+        //Ask Dima: return <Tag value={rowData.editorId} severity={getEditorById(rowData)}></Tag>;
+        return getEditorById(rowData);
     };
 
     const actionBodyTemplate = (rowData) => {
@@ -289,6 +290,16 @@ function InformationSaDataListTable({ givenAssets }) { //props
 
             default:
                 return null;
+        }
+    };
+    
+    const getEditorById = (editorId) => {
+        switch (editorId) {
+            case '0':
+                return 'Donald Duck';
+
+            default:
+                return 'Donald Duck';
         }
     };
 
@@ -325,7 +336,10 @@ function InformationSaDataListTable({ givenAssets }) { //props
         <>
             <Toast ref={toast} />
             {/*<div className="card">*/}
-                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                <Toolbar 
+                    // className="mb-4" 
+                         left={leftToolbarTemplate} 
+                         right={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} 
                            value={assets} 
@@ -335,7 +349,8 @@ function InformationSaDataListTable({ givenAssets }) { //props
                            // className="testclass"
                            tableClassName="table table-hover table-sm"
                            tableStyle={{width: '100%'}}
-                           
+                           // sortIcon="fa fa-check"
+                           // checkIcon="fa fa-check"
                            cellClassName="eu-DataTable-cellClassName"
                            rowClassName="eu-DataTable-rowClassName"
                            paginatorClassName="eu-DataTable-paginatorClassName"
@@ -352,7 +367,7 @@ function InformationSaDataListTable({ givenAssets }) { //props
                     {/*<Column field="image" header="Image" body={imageBodyTemplate}></Column>*/}
                     {/*<Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>*/}
                     <Column field="beschreibung" header="Beschreibung" sortable footerClassName="eu-Column-footerClassName" filterHeaderClassName="eu-Column-filterHeaderClassName" bodyClassName="eu-Column-bodyClassName" className="eu-Column-className" headerClassName="eu-Column-headerClassName"></Column>
-                    <Column field="editor" header="Bearbeiter" sortable></Column>
+                    <Column field="editorId" header="Bearbeiter" body={editorBodyTemplate} sortable></Column>
                     <Column field="saStatus" header="Status" body={saStatusBodyTemplate} sortable></Column>
                     {/*<Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>*/}
                     {/*<Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>*/}
