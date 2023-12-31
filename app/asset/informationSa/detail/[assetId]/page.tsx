@@ -72,7 +72,10 @@ function InformationDetail({ params }) {
 
   const onSubmit = (formDataValues) => {
 
-    let usr: UserDTO = null;
+    let usr: UserDTO =
+      {
+        
+      };
     
     let submitAsset: AssetDTO = {
       entityId: assetId,
@@ -212,9 +215,9 @@ function InformationDetail({ params }) {
                                       // ... and update the state variable on any edits!
                                      className="form-control"
                               />
-                              <p className="text-[#ed6172] font-semibold px-2">
-                                {errors.name?.message}
-                              </p>
+                              {/*<p className="text-[#ed6172] font-semibold px-2">*/}
+                              {/*  {errors.name?.message}*/}
+                              {/*</p>*/}
                             </div>
                           </div>
                           <div className="row mb-3">
@@ -230,9 +233,9 @@ function InformationDetail({ params }) {
                                      onChange={handleInputChange} // ... and update the state variable on any edits!
                                      className="form-control"
                               />
-                              <p className="text-[#ed6172] font-semibold px-2">
-                                {errors.beschreibung?.message}
-                              </p>
+                              {/*<p className="text-[#ed6172] font-semibold px-2">*/}
+                              {/*  {errors.beschreibung?.message}*/}
+                              {/*</p>*/}
                             </div>
                           </div>
 
@@ -340,7 +343,7 @@ function InformationDetail({ params }) {
 
 
                           {/*Eugen: inside form submit*/}
-                          <button type="submit" className="btn btn-primary me-1" ref={formBtnRef}>speichern</button>
+                          <button type="submit" className="btn btn-primary" ref={formBtnRef}>speichern</button>
 
                           <a className="btn btn-light ms-1" href="/asset/informationSa/list">zurück</a>
 

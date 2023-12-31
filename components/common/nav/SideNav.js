@@ -37,7 +37,7 @@ function SideNav(message, error) {
 
 
 
-                            <a className="sidebar-link disabledLink disabled">
+                            <a className="sidebar-link" href="/dashboard">
 
                                 <i className="align-middle me-2 fas fa-fw fa-home "></i>
                                 <span className="align-middle">Dashboard</span>
@@ -111,7 +111,7 @@ function SideNav(message, error) {
 
 
 
-                            <a className="sidebar-link" href="/informationSa/list">
+                            <a className="sidebar-link" href="/asset/informationSa/list">
 
                                 <i className="align-middle me-2 far fa-fw fa-edit "></i>
                                 <span className="align-middle">Informationen</span>

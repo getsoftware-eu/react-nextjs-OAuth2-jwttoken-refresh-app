@@ -32,15 +32,15 @@ export const metadata: Metadata = {
     title: 'Struktura',
     description: 'Welcome to Struktura',
     viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-    openGraph: {
-        type: "website",
-        title: "Sakai by PrimeReact | Free Admin Template for NextJS",
-        url: "https://www.primefaces.org/sakai-react",
-        description:
-            "The ultimate collection of design-agnostic, flexible and accessible React UI Components.",
-        images: ["https://www.primefaces.org/static/social/sakai-nextjs.png"],
-        ttl: 604800,
-    },
+    // openGraph: {
+    //     type: "website",
+    //     title: "Sakai by PrimeReact | Free Admin Template for NextJS",
+    //     url: "https://www.primefaces.org/sakai-react",
+    //     description:
+    //         "The ultimate collection of design-agnostic, flexible and accessible React UI Components.",
+    //     images: ["https://www.primefaces.org/static/social/sakai-nextjs.png"],
+    //     ttl: 604800,
+    // },
     icons: {
         icon: "/favicon.ico",
     },
