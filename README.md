@@ -16,7 +16,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-On Server please user **reddit** to cache the tokens.
+On Server please user **reddit** to cache the jwt-tokens.
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
