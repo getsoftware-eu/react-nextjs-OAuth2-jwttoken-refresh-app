@@ -3,7 +3,7 @@
 import { SessionProvider } from "next-auth/react";
 import React, { ReactNode } from "react";
 import { PrimeReactProvider } from 'primereact/api';
-import Bootstrap_PT from "./passthrough/bootstrap";
+import Bootstrap_PT from "./old/passthrough/bootstrap";
 
 interface Props {
   children: ReactNode;

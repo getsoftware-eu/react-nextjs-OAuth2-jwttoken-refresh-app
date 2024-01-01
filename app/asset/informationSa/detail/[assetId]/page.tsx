@@ -9,7 +9,7 @@ import {useRouter} from "next/navigation";
 import {toast} from "react-hot-toast";
 // import InformationService from "/services/informationService";
 import SideNav from "/components/common/nav/SideNav";
-import TopNav from "/components/common/nav/TopNav";
+import TopNav from "/components/common/nav/AppTopNav";
 import {H1} from "/components/common/Сontent";
 import FooterNav from "/components/common/nav/FooterNav";
 import {useForm} from "react-hook-form";

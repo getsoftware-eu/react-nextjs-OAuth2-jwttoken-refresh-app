@@ -2,10 +2,10 @@
 import { PieChart } from '@mui/x-charts/PieChart';
 import {useSession} from "next-auth/react";
 import React from "react";
-import SideNav from "../../components/common/nav/SideNav";
-import AppTopNav from "../nav/AppTopNav";
-import {H1} from "../../components/common/Сontent";
-import FooterNav from "../../components/common/nav/FooterNav";
+import SideNav from "/components/common/nav/SideNav";
+import AppTopNav from "/components/common/nav/AppTopNav";
+import {H1} from "/components/common/Сontent";
+import FooterNav from "/components/common/nav/FooterNav";
 
 const DashboardPage = () => {
     const { data: session } = useSession();
