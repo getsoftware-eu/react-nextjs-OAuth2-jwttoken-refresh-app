@@ -13,6 +13,7 @@ import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
 import {useSession} from "next-auth/react";
 import Link from "next/link";
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
 
 function InformationSaDataListTable({ givenAssets }) { //props
 
@@ -28,6 +29,9 @@ function InformationSaDataListTable({ givenAssets }) { //props
         ownerId: 0,
         vertreterId: 0,
         editorId: 0,
+        price: 0,
+        quantity: 0,
+        rating: 0,
         inventoryStatus: 'INSTOCK'
     };
     
@@ -41,22 +45,58 @@ function InformationSaDataListTable({ givenAssets }) { //props
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
-
+    const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [filters, setFilters] = useState({
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        'country.name': { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        beschreibung: { value: null, matchMode: FilterMatchMode.IN },
+        saStatus: { value: null, matchMode: FilterMatchMode.EQUALS },
+        verified: { value: null, matchMode: FilterMatchMode.EQUALS }
+    });
+    
     useEffect(() => {
         // if(useTestData) {
         //     ProductService.getProducts().then((data) =>
-        //         setInfos(
-        //             data
+        //         setAssets(data));
+        //         setLoading(false);
         //         ));
         // }
         // else 
-            setAssets(givenAssets);
+        setAssets(givenAssets);
+        setLoading(false);
 
     }, [givenAssets]);
 
-    const formatCurrency = (value) => {
-        return value?.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    /**
+     * get Customers-array from DB and set actuall Date!
+     * @param data
+     * @returns {*[]}
+     */
+    const getCustomers = (data) => {
+        return [...(data || [])].map((d) => {
+            d.date = new Date(d.date);
+
+            return d;
+        });
     };
+
+    // const representativeRowFilterTemplate = (options) => {
+    //     return (
+    //         <MultiSelect
+    //             value={options.value}
+    //             options={representatives}
+    //             itemTemplate={representativesItemTemplate}
+    //             onChange={(e) => options.filterApplyCallback(e.value)}
+    //             optionLabel="name"
+    //             placeholder="Any"
+    //             className="p-column-filter"
+    //             maxSelectedLabels={1}
+    //             style={{ minWidth: '14rem' }}
+    //         />
+    //     );
+    // };
 
     const openNew = () => {
         setEditAsset(emptyAsset);
@@ -76,7 +116,7 @@ function InformationSaDataListTable({ givenAssets }) { //props
     const hideDeleteProductsDialog = () => {
         setDeleteProductsDialog(false);
     };
-
+    
     const saveAsset = () => {
         setSubmitted(true);
 
@@ -217,7 +257,7 @@ function InformationSaDataListTable({ givenAssets }) { //props
             <div className="col-auto">
                 {/*<span className="p-input-icon-left">*/}
                 {/*<i className="pi pi-search" />*/}
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." className="form-control" style={{height: '32px'}}/>
+                <InputText type="search" value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Search..." style={{height: '32px'}}/>
                 {/*</span>*/}
             </div>
             
@@ -241,10 +281,7 @@ function InformationSaDataListTable({ givenAssets }) { //props
     const imageBodyTemplate = (rowData) => {
         return <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />;
     };
-
-    const priceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.price);
-    };
+    
 
     const nameBodyTemplate = (rowData) => {
         return (
@@ -332,6 +369,16 @@ function InformationSaDataListTable({ givenAssets }) { //props
         </React.Fragment>
     );
 
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        let _filters = { ...filters };
+
+        _filters['global'].value = value;
+
+        setFilters(_filters);
+        setGlobalFilterValue(value);
+    };
+
     return (
         <>
             <Toast ref={toast} />
@@ -341,26 +388,41 @@ function InformationSaDataListTable({ givenAssets }) { //props
                          left={leftToolbarTemplate} 
                          right={rightToolbarTemplate}></Toolbar>
 
-                <DataTable ref={dt} 
-                           value={assets} 
-                           selection={selectedProducts} 
-                           onSelectionChange={(e) => setSelectedProducts(e.value)}
-                           dataKey="entityId"  
-                           // className="testclass"
-                           tableClassName="table table-hover table-sm"
-                           tableStyle={{width: '100%'}}
-                           // sortIcon="fa fa-check"
-                           // checkIcon="fa fa-check"
-                           cellClassName="eu-DataTable-cellClassName"
-                           rowClassName="eu-DataTable-rowClassName"
-                           paginatorClassName="eu-DataTable-paginatorClassName"
-                           className="eu-DataTable-className"
-                           // paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                           // paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                           // currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" 
-                           globalFilter={globalFilter}
-                           header={header}
-                     >
+            <DataTable value={assets} 
+                       // paginator 
+                       // rows={10} 
+                       dataKey="entityId" 
+                       filters={filters} 
+                       filterDisplay="row" 
+                       loading={loading} 
+                       globalFilterFields={['name', 'beschreibung', 'saStatus']}
+                       header={header} 
+                       emptyMessage="No customers found."
+            >
+
+            {/*<DataTable ref={dt} */}
+            {/*               value={assets} */}
+            {/*               selection={selectedProducts} */}
+            {/*               // onSelectionChange={(e) => setSelectedProducts(e.value)}*/}
+            {/*               dataKey="entityId"  */}
+            {/*               // className="testclass"*/}
+            {/*               tableClassName="table table-hover table-sm"*/}
+            {/*               tableStyle={{width: '100%'}}*/}
+            {/*               // sortIcon="fa fa-check"*/}
+            {/*               // checkIcon="fa fa-check"*/}
+            {/*               cellClassName="eu-DataTable-cellClassName"*/}
+            {/*               rowClassName="eu-DataTable-rowClassName"*/}
+            {/*               paginatorClassName="eu-DataTable-paginatorClassName"*/}
+            {/*               className="eu-DataTable-className"*/}
+            {/*               // paginator rows={10} rowsPerPageOptions={[5, 10, 25]}*/}
+            {/*               // paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"*/}
+            {/*               // currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" */}
+            {/*               globalFilter={globalFilter}*/}
+            {/*               globalFilterFields={['name', 'beschreibung', 'saStatus']}*/}
+            {/*               filterDisplay="row"*/}
+            {/*               emptyMessage="No assets found."*/}
+            {/*               header={header}*/}
+            {/*         >*/}
                     <Column selectionMode="multiple" exportable={false}></Column>
                     {/*<Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>*/}
                     <Column field="name" header="Name" body={nameBodyTemplate} sortable></Column>

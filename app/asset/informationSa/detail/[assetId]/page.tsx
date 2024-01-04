@@ -6,7 +6,7 @@ import {useSession} from "next-auth/react";
 import {useRouter} from "next/navigation";
 // import { useDispatch } from "react-redux";
 // import { add, remove } from "/redux/informationSlice";
-import {toast} from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
 // import InformationService from "/services/informationService";
 import SideNav from "/components/common/nav/SideNav";
 import TopNav from "/components/common/nav/AppTopNav";
@@ -26,6 +26,7 @@ function InformationDetail({ params }) {
   // const userService = new UserService(session);
   // const informationService = new InformationService(session);
   const axiosAuth = useAxiosAuth();
+  // const toast = useRef(null);
 
   const router = useRouter();
   // const dispatch = useDispatch();
@@ -51,6 +52,7 @@ function InformationDetail({ params }) {
       if(tempAsset.name)
       {
         setAsset(tempAsset);
+        toast.success('Information updated');
       }
       else isServerAssetRequested = false;
     }
@@ -116,17 +118,18 @@ function InformationDetail({ params }) {
           loading: 'Your information is saving...',
           success: <b>Information saved!</b>,
           error: <b>Could not save.</b>,
-        },{
-          style: {
-            border: '1px solid #14b8a5',
-            padding: '16px',
-            color: '#14b8a5',
-          },
-          iconTheme: {
-            primary: '#14b8a5',
-            secondary: '#FFFAEE',
-          },
-        }
+        },
+        // {
+        //   style: {
+        //     border: '1px solid #14b8a5',
+        //     padding: '16px',
+        //     color: '#14b8a5',
+        //   },
+        //   iconTheme: {
+        //     primary: '#14b8a5',
+        //     secondary: '#FFFAEE',
+        //   },
+        // }
     )
   };
 

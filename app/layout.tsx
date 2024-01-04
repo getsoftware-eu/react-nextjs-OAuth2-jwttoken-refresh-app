@@ -2,8 +2,9 @@
 // import "styles/css/primereact/prime-react-over.css";
 import "styles/spark3/modern.scss";
 import {Metadata} from 'next'
-import {ReactNode} from "react";
+import React, {ReactNode} from "react";
 import Providers from "./Providers";
+import toast, { Toaster } from 'react-hot-toast';
 // import App from './App';
 // import {Head} from "next/document";
 // import { Html, Head, Main, NextScript } from 'next/document';
@@ -64,6 +65,36 @@ export default function RootLayout({ children }: RootLayoutProps) {
              <div className={"  h-screen "}>{children}</div>
                 {/*</PrimeReactProvider>*/}
             {/*</div>*/}
+            <Toaster position="top-right" 
+                toastOptions={{
+                    className: 'alert',
+                    style: {
+                        color: '#fff',
+                    },
+                    duration: 50000,
+
+                    success: {
+                        className: 'alert-success',
+                        style: {
+                            background: '#28a745',
+                        },
+                        iconTheme: {
+                            primary: '#28a745',
+                            secondary: '#fff',
+                        },
+                    },
+                    error: {
+                        className: 'alert-danger',
+                        style: {
+                            background: '#dc3545',
+                        },
+                        iconTheme: {
+                            primary: '#dc3545',
+                            secondary: '#fff',
+                        },
+                    }
+                }}
+            />
         </Providers>
 
         <svg width="0" height="0" style={{position: 'absolute'}}>

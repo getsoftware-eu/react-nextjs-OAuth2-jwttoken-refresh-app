@@ -18,7 +18,7 @@ const AppTopNav = () => {
                     <a className="sidebar-toggle d-flex me-2">
                         <i className="hamburger align-self-center"></i>
                     </a>
-
+                    
                     <div className="navbar-collapse collapse">
                         {session?.user ? (
                             <>
