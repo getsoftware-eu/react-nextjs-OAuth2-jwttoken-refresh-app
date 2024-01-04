@@ -11,6 +11,7 @@ import {H1} from "/components/common/Сontent";
 import FooterNav from "/components/common/nav/FooterNav";
 import useAxiosAuth from "../../../../lib/hooks/useAxiosAuth";
 import {AssetDTO, UserDTO} from "../../../../types/interfacesDTO";
+import toast, { Toaster } from 'react-hot-toast';
 
 //TODO extract global method
 function createPostFormData(asset: AssetDTO) {
@@ -67,34 +68,35 @@ function CreateInformation({ props }) {
 
     let formData = createPostFormData(_asset);
 
-    // toast.promise(
-    //     //TODO informationService.save(formData)
-    //     axiosAuth
-    //     .post("/api/v1/asset/informations/", formData, {
-    //           headers: {
-    //             'Content-Type':'multipart/form-data',  
-    //           },
-    //         })
-    //         .then((res) => {
-    //     if(res.status === 200)
-    //       router.push("/asset/informationSa/detail/" + res.data.entityId);
-    //   }),
-    //   {
-    //     loading: 'Your information is saving...',
-    //     success: <b>Information saved!</b>,
-    //     error: <b>Could not save.</b>,
-    //   },{
-    //     style: {
-    //       border: '1px solid #14b8a5',
-    //       padding: '16px',
-    //       color: '#14b8a5',
-    //     },
-    //     iconTheme: {
-    //       primary: '#14b8a5',
-    //       secondary: '#FFFAEE',
-    //     },
-    //   }
-    // )
+    toast.promise(
+        //TODO informationService.save(formData)
+        axiosAuth
+        .post("/api/v1/asset/informations/", formData, {
+              headers: {
+                'Content-Type':'multipart/form-data',  
+              },
+            })
+            .then((res) => {
+        if(res.status === 200)
+          router.push("/asset/informationSa/detail/" + res.data.entityId);
+      }),
+      {
+        loading: 'Your information is saving...',
+        success: <b>Information saved!</b>,
+        error: <b>Could not save.</b>,
+      },
+      //   {
+      //   style: {
+      //     border: '1px solid #14b8a5',
+      //     padding: '16px',
+      //     color: '#14b8a5',
+      //   },
+      //   iconTheme: {
+      //     primary: '#14b8a5',
+      //     secondary: '#FFFAEE',
+      //   },
+      // }
+    )
   };
 
   /**

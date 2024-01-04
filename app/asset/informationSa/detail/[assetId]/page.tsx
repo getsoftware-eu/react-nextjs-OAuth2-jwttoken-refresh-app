@@ -52,7 +52,7 @@ function InformationDetail({ params }) {
       if(tempAsset.name)
       {
         setAsset(tempAsset);
-        toast.success('Information updated');
+        // toast.success('Information updated');
       }
       else isServerAssetRequested = false;
     }
