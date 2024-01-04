@@ -80,22 +80,11 @@ function CreateInformation({ props }) {
         if(res.status === 200)
           router.push("/asset/informationSa/detail/" + res.data.entityId);
       }),
-      {
-        loading: 'Your information is saving...',
-        success: <b>Information saved!</b>,
-        error: <b>Could not save.</b>,
-      },
-      //   {
-      //   style: {
-      //     border: '1px solid #14b8a5',
-      //     padding: '16px',
-      //     color: '#14b8a5',
-      //   },
-      //   iconTheme: {
-      //     primary: '#14b8a5',
-      //     secondary: '#FFFAEE',
-      //   },
-      // }
+        {
+          pending: 'saving...',
+          success: 'Die Daten wurden erfolgreich aktualisiert',
+          error: 'Could not save.'
+        },
     )
   };
 

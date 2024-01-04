@@ -113,15 +113,13 @@ function InformationDetail({ params }) {
             if(res.status === 200)
               router.push("/asset/informationSa/detail/" + res.data.entityId);
           })
-
-    const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
     
     toast.promise(
-        resolveAfter3Sec,
+        updateAssetPromise,
         {
           pending: 'saving...',
           success: 'Die Daten wurden erfolgreich aktualisiert',
-          error: 'Error on saving information'
+          error: 'Could not save.'
         },
     )
   };
