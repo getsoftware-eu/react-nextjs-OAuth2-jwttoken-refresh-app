@@ -11,7 +11,7 @@ import {H1} from "/components/common/Сontent";
 import FooterNav from "/components/common/nav/FooterNav";
 import useAxiosAuth from "../../../../lib/hooks/useAxiosAuth";
 import {AssetDTO, UserDTO} from "../../../../types/interfacesDTO";
-import toast, { Toaster } from 'react-hot-toast';
+import { ToastContainer, toast } from 'react-toastify';
 
 //TODO extract global method
 function createPostFormData(asset: AssetDTO) {

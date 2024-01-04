@@ -1,3 +1,6 @@
+//eugen overwrite prime variables
+
+
 //basic theme variables
 $primaryLightColor: rgba(38,143,255,.5) !default;
 $primaryColor: #3b7ddd !default; //--bs-primary:
@@ -13,5 +16,5 @@ $tableHeaderCellFontWeight: 700 !default;
 $tableHeaderCellTextHoverColor: rgb(62, 70, 118);
 $tableHeaderCellIconColor: rgb(222, 226, 230);
 
-@import '../_variables_bs5_spark_ov';
+@import '../my-variables_bs5_spark_ov';
 //@import '../_variables_bs4_light';

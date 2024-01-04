@@ -6,7 +6,7 @@ import {useSession} from "next-auth/react";
 import {useRouter} from "next/navigation";
 // import { useDispatch } from "react-redux";
 // import { add, remove } from "/redux/informationSlice";
-import toast, { Toaster } from 'react-hot-toast';
+import { ToastContainer, toast } from 'react-toastify';
 // import InformationService from "/services/informationService";
 import SideNav from "/components/common/nav/SideNav";
 import TopNav from "/components/common/nav/AppTopNav";
@@ -101,35 +101,28 @@ function InformationDetail({ params }) {
     let formData = new FormData();
     formData.append("asset", blob);
     //////
+
+    let updateAssetPromise = 
+        // informationService.update(formData, information.entityId).then((res) => {
+          axiosAuth.put("/api/v1/asset/informations/" + assetId, formData, {
+            headers: {
+              'Content-Type':'multipart/form-data',
+            },
+          })
+          .then((res) => {
+            if(res.status === 200)
+              router.push("/asset/informationSa/detail/" + res.data.entityId);
+          })
+
+    const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
     
     toast.promise(
-        // informationService.update(formData, information.entityId).then((res) => {
-        axiosAuth
-            .put("/api/v1/asset/informations/" + assetId, formData, {
-              headers: {
-                'Content-Type':'multipart/form-data',  
-              },
-            })   
-        .then((res) => {   
-          if(res.status === 200)
-                  router.push("/asset/informationSa/detail/" + res.data.entityId);
-              }),
+        resolveAfter3Sec,
         {
-          loading: 'Your information is saving...',
-          success: <b>Information saved!</b>,
-          error: <b>Could not save.</b>,
+          pending: 'saving...',
+          success: 'Die Daten wurden erfolgreich aktualisiert',
+          error: 'Error on saving information'
         },
-        // {
-        //   style: {
-        //     border: '1px solid #14b8a5',
-        //     padding: '16px',
-        //     color: '#14b8a5',
-        //   },
-        //   iconTheme: {
-        //     primary: '#14b8a5',
-        //     secondary: '#FFFAEE',
-        //   },
-        // }
     )
   };
 
