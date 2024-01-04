@@ -2,6 +2,6 @@
 
 :root {
   //--toastify-font-family: $fontFamily;
-  --toastify-font-family: --bs-body-font-family; //from bootstrap5
+  --toastify-font-family: var(--bs-body-font-family); //from bootstrap5
   //TODO overwrite https://fkhadra.github.io/react-toastify/how-to-style
 }
