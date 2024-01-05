@@ -9,6 +9,7 @@ import FooterNav from "/components/common/nav/FooterNav";
 import {useSession} from "next-auth/react";
 // import InformationService from "/services/informationService";
 import useAxiosAuth from "../../../../lib/hooks/useAxiosAuth";
+import BasicFilterDemo from "../../../../components/asset/information/sa/AssetSaListPrimeReactDataTable22";
 
 export default function InformationSaList({ params }) {
 
@@ -55,7 +56,8 @@ export default function InformationSaList({ params }) {
                             <div className="col-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <AssetSaListPrimeReactDataTable givenAssets={assets}/>
+                                        {/*<AssetSaListPrimeReactDataTable givenAssets={assets}/>*/}
+                                        <BasicFilterDemo/>
                                     </div>
                                 </div>
                             </div>
