@@ -15,7 +15,7 @@ import {useSession} from "next-auth/react";
 import Link from "next/link";
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 
-function InformationSaDataListTable({ givenAssets }) { //props
+function InformationSaDataListOldTable({ givenAssets }) { //props
 
     const { data: session } = useSession();
     
