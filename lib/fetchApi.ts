@@ -15,6 +15,12 @@ async function refreshToken(refreshTokenString: string) {
   return data.accessToken;
 }
 
+/**
+ * central SERVER Auth fetch Method
+ * Usage only via client-hook!!!
+ * @param url
+ * @constructor
+ */
 export async function AuthGetApi(url: string) {
   const session = await getServerSession(authOptions);
   console.log("before refresh: session?.user.accessToken=", session?.user.accessToken);

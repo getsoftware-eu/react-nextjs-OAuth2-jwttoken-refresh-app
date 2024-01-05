@@ -3,6 +3,9 @@
 import axios from "lib/axios";
 import {signIn, signOut, useSession} from "next-auth/react";
 
+/**
+ * system refreashtoken communication
+ */
 export const useRefreshToken = () => {
   const { data: session } = useSession();
 

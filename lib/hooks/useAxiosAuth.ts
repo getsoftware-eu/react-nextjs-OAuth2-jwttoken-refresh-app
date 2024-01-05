@@ -4,6 +4,11 @@ import {signOut, useSession} from "next-auth/react";
 import { useEffect } from "react";
 import { useRefreshToken } from "./useRefreshToken";
 
+/**
+ * central CLIENT(!!!) fetch usage:
+ * axiosAuth.get(path...)
+ * axiosAuth.post(path...)
+ */
 const useAxiosAuth = () => {
   const { data: session } = useSession();
   const refreshToken = useRefreshToken();
