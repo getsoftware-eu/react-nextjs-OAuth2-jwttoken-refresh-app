@@ -131,8 +131,10 @@
             }
 
             &.p-highlight {
-                background: $highlightBg;
-                color: $highlightTextColor;
+                .p-datatable .p-datatable-tbody > tr.p-highlight {
+                    background: rgba(59, 125, 221, 0);
+                    color: inherit;
+                }
             }
 
             &.p-highlight-contextmenu {

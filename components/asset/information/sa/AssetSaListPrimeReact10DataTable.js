@@ -303,7 +303,8 @@ export default function InformationSaDataListTable({ givenAssets }) {
                             className="eu-Column-className"
                             headerClassName="eu-Column-headerClassName"/>
                     <Column field="editorId" header="Bearbeiter" body={editorBodyTemplate}
-                            sortable filter showFilterMenu={false} filterMenuStyle={{width: '14rem'}} 
+                            sortable filter 
+                            // showFilterMenu={false} filterMenuStyle={{width: '14rem'}} 
                             style={{height: '32px'}} 
                             // filterElement={statusRowFilterTemplate}
                     />

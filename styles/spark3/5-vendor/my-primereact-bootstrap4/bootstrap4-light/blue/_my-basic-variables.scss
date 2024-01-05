@@ -8,8 +8,9 @@ $primaryDarkColor: #0069d9 !default;
 $primaryDarkerColor: #0062cc !default;
 $primaryTextColor: #ffffff !default;
 
-$highlightBg:  rgba($primaryColor, 0) !default;
-$highlightTextColor: $primaryTextColor !default;
+//datatable row selected p-highlight
+$highlightBg: rgba(0,0,0, $table-hover-bg-factor) !default; //$table-hover-bg !default; //This variable provides the background color of the table with a hover state. By default, it is black color with a contrast of 0.075. //rgba($primaryColor, 0) !default; 
+$highlightTextColor: $table-hover-color !default; //This variable provides the text color for the table with the hover state. By default, it is a gray color. //$primaryColor !default; //$primaryTextColor !default;
 
 //overwrite prime: components > data > datatables
 $tableHeaderCellFontWeight: 700 !default;
