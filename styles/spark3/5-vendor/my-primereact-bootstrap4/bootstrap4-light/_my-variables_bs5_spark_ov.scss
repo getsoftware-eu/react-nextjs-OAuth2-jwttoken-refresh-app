@@ -479,7 +479,7 @@ $tableHeaderTextColor:$shade900 !default;
 $tableHeaderFontWeight:600 !default;
 $tableHeaderPadding: 0rem 0rem !default; //1rem 1rem !default;
 
-$tableHeaderCellPadding:1rem 1rem !default;
+$tableHeaderCellPadding:0.3rem 0.3rem !default; //1rem 1rem !default;
 $tableHeaderCellBg:$shade000 !default;
 //$tableHeaderCellTextColor:$shade900 !default;
 $tableHeaderCellTextColor:rgb(62, 70, 118) !default;
@@ -504,7 +504,7 @@ $tableBodyRowHoverBg:$shade200 !default;
 $tableBodyRowTextHoverColor:$shade900 !default;
 $tableBodyCellBorder:1px solid #dee2e6 !default;
 $tableBodyCellBorderWidth:1px 0 0 0 !default;
-$tableBodyCellPadding:1rem 1rem !default;
+$tableBodyCellPadding: 0.3rem 0.3rem !default; //1rem 1rem !default;
 
 $tableFooterCellPadding:1rem 1rem !default;
 $tableFooterCellBg:$shade000 !default;

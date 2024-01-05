@@ -277,24 +277,27 @@ export default function InformationSaDataListTable({ givenAssets }) {
                     // paginator rows={10} 
                            dataKey="entityId"
                            filters={filters}
-                           filterDisplay="row"
+                           // filterDisplay="row"
                            loading={loading}
                     // globalFilterFields={['name', 'country.name', 'representative.name', 'status']} 
                            selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} tableStyle={{ minWidth: '50rem' }}
                            globalFilterFields={['name', 'beschreibung', 'saStatus']}
                            header={header}
                            emptyMessage="No assets found.">
-                    <Column selectionMode="multiple" exportable={false} headerStyle={{ width: '3rem' }}></Column>
+                    <Column selectionMode="multiple" exportable={false} 
+                            // headerStyle={{ width: '3rem' }}
+                    ></Column>
                     <Column field="name" header="Name" body={nameBodyTemplate}
-                            sortable filter filterPlaceholder="Search by name"
-                            filterMenuStyle={{height: '32px'}} 
+                            sortable 
+                            // filter filterPlaceholder="Search by name" filterMenuStyle={{height: '32px'}} 
                             style={{height: '32px'}}/>
                     {/*<Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />*/}
                     {/*<Column filterField="beschreibung" header="Beschreibung" sortable showFilterMenu={false} filterMenuStyle={{ width: '14rem' }} style={{ height: '32px' }}*/}
                     {/*        body={representativeBodyTemplate} filter filterElement={representativeRowFilterTemplate} footerClassName="eu-Column-footerClassName" filterHeaderClassName="eu-Column-filterHeaderClassName" bodyClassName="eu-Column-bodyClassName" className="eu-Column-className" headerClassName="eu-Column-headerClassName"/>*/}
                     <Column field="beschreibung" header="Beschreibung"
                             // filterField="beschreibung" ???
-                            sortable filter  showFilterMenu={false} filterMenuStyle={{width: '14rem'}} 
+                            sortable 
+                            // filter  showFilterMenu={false} filterMenuStyle={{width: '14rem'}} 
                             style={{height: '32px'}}
                             // body={representativeBodyTemplate
                             footerClassName="eu-Column-footerClassName"
@@ -303,13 +306,14 @@ export default function InformationSaDataListTable({ givenAssets }) {
                             className="eu-Column-className"
                             headerClassName="eu-Column-headerClassName"/>
                     <Column field="editorId" header="Bearbeiter" body={editorBodyTemplate}
-                            sortable filter 
-                            // showFilterMenu={false} filterMenuStyle={{width: '14rem'}} 
+                            sortable 
+                            // filter  showFilterMenu={false} filterMenuStyle={{width: '14rem'}} 
                             style={{height: '32px'}} 
                             // filterElement={statusRowFilterTemplate}
                     />
                     <Column field="saStatus" header="Status" body={saStatusBodyTemplate}
-                            sortable filter showFilterMenu={false} filterMenuStyle={{width: '14rem'}} 
+                            sortable 
+                            // filter showFilterMenu={false} filterMenuStyle={{width: '14rem'}} 
                             style={{height: '32px'}} 
                             // filterElement={statusRowFilterTemplate}
                     />
