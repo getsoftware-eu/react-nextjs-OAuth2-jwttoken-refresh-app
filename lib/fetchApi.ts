@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "pages/api/auth/[...nextauth]";
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 async function refreshToken(refreshTokenString: string) {
   const res = await fetch(BASE_URL + "/api/v1/auth/refresh/accessToken", {
     method: "POST",

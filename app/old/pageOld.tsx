@@ -51,7 +51,7 @@ const HomePage = () => {
                             <div className="text-center mt-3">
 
                               {/*<p className="text-sky-600"> {session.user.name}</p>*/}
-                                <button className="btn btn-lg btn-primary" onClick={() => signOut({ callbackUrl: 'http://localhost:3000/login' })}>
+                                <button className="btn btn-lg btn-primary" onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_FRONTEND_URL + '/login' })}>
                                   Sign Out
                                 </button>
                             </div>

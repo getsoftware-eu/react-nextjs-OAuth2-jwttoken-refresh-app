@@ -28,7 +28,7 @@ export const useRefreshToken = () => {
       {
         res.status = 401;
         res.statusText = "Jwt problem";
-        signOut({ callbackUrl: 'http://localhost:3000/login' }).then();
+        signOut({ callbackUrl: process.env.NEXT_PUBLIC_FRONTEND_URL + '/login' }).then();
       }
       else{
         console.log("persist new accessToken:" + res.data.accessToken)

@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
   const { category } = context.params;
 
   const informations = await fetch(
-    "http://localhost:8080/api/v1/asset/informations/getByCategoryName/" + category
+      process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/asset/informations/getByCategoryName/" + category
   ).then((res) => res.json());
 
   return {

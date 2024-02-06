@@ -22,7 +22,7 @@ function Login() {
   // const dispatch = useDispatch();
 
   if (session && status === "authenticated") {
-    window.location.href = "http://localhost:3000/asset/informationSa/list"
+    window.location.href = process.env.NEXT_PUBLIC_FRONTEND_URL+"/asset/informationSa/list"
   }
   
   const {

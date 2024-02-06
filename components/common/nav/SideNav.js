@@ -11,6 +11,16 @@ function SideNav(message, error) {
     else if (error)
         systemMsg = error
 
+    const getServerAsynchInitData = async () => {
+        const res = await axiosAuth.get("/api/v1/user/informations/");
+
+        let informationArray = res.data;
+        if (Array.isArray(informationArray)) {
+            setAssets(informationArray);
+            isUpdated=true;
+        }
+    };
+    
     return (
         <>
             <nav id="sidebar" className="sidebar">
