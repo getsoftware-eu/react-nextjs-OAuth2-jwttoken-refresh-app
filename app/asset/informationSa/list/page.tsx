@@ -38,39 +38,43 @@ export default function InformationSaList({ params }) {
        //wait untill session!! sonst keine Abfrage!
     }, [session])
    
-    if (session) {
-    return (
-        <>
-        <div className="wrapper">
-            <SideNav />
-            <div className="main">
-                <AppTopNav/>
-                <main className="content">
-                    <div className="container-fluid">
-                        <div className="header">
-                            <H1 text="Informationen" />
-                            <p className="header-subtitle">Strukturanalyse</p>
-                        </div>
-                        {/*<#nested />*/}
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="card">
-                                    <div className="card-body">
-                                        {/*<AssetSaListPrimeReactDataTable givenAssets={assets}/>*/}
-                                        <InformationSaDataListTable givenAssets={assets} />
+    // if (session) {
+        return (
+            <>
+            <div className="wrapper">
+                <SideNav />
+                <div className="main">
+                    <AppTopNav/>
+                    <main className="content">
+                        <div className="container-fluid">
+                            <div className="header">
+                                <H1 text="Informationen" />
+                                <p className="header-subtitle">Strukturanalyse</p>
+                            </div>
+                            {/*<#nested />*/}
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            {session 
+                                                ? <InformationSaDataListTable givenAssets={assets} />
+                                                : <p>Loading...</p>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </main>
-                {/*<@footer />*/}
-                <FooterNav />
+                    </main>
+                    {/*<@footer />*/}
+                    <FooterNav />
+                </div>
             </div>
-        </div>
-        </>
-    );}
-    return <p>Loading...</p>
+            </>
+        );
+    // }
+    
+    // return <p>Loading...</p>
 
 }
 

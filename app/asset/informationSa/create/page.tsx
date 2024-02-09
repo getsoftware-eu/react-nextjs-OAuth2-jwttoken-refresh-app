@@ -42,7 +42,18 @@ function CreateInformation({ props }) {
   } = useForm();
 
   const fetchPost = async (formData: any) => {
-    const res = await axiosAuth.post("/api/v1/asset/informations/", formData);
+    const res = await axiosAuth.post("/api/v1/asset/informations/", formData
+        // , { // invalidate the cache after put
+        //   cache: {
+        //     update: {
+        //       // Internally calls the storage.remove('list-posts') and lets the
+        //       // next request be forwarded to the server without you having to
+        //       // do any checks.
+        //       'list-assets': 'delete'
+        //     }
+        //   }
+        // }
+        );
 
     let serverAssetArray = res.data;
     if (Array.isArray(serverAssetArray)) {

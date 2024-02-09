@@ -15,8 +15,21 @@ import FooterNav from "/components/common/nav/FooterNav";
 import {useForm} from "react-hook-form";
 import useAxiosAuth from "../../../../../lib/hooks/useAxiosAuth";
 import {AssetDTO, UserDTO} from "../../../../../types/interfacesDTO";
+import {axiosAuth} from "../../../../../lib/axios";
 
-function InformationDetail({ params }) {
+// async function getAsset(assetId: number) {
+//   const res = await axiosAuth.get("/api/v1/asset/informations/" + assetId
+//   //     , {
+//   //   next: {
+//   //     revalidate: 60
+//   //   }
+//   // }
+//   );
+//  
+//   return res.json();
+// }
+
+export default function InformationDetail({ params }) {
 
   const assetId = params.assetId;
 
@@ -684,4 +697,4 @@ function InformationDetail({ params }) {
 
 
 
-export default InformationDetail;
+// export default InformationDetail;
