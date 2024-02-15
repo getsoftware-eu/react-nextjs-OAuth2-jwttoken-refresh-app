@@ -41,7 +41,7 @@ function SideNav({pagePath, message, error}) {
                 )
                 :
                 (
-                    <a className="sidebar-link" href={url}>
+                    <a className="sidebar-link" href={url.endsWith("/")? url+"list" : url}>
                         <i className={"align-middle me-2 " + (customIcon? customIcon : iconActive? "far fa-fw fa-edit" : "fas fa-fw fa-check")}></i>
                         <span className="align-middle">{label}</span>
                     </a>
@@ -83,19 +83,19 @@ function SideNav({pagePath, message, error}) {
                             STRUKTURANALYSE
                         </li>
 
-                        {sidebarItem("/asset/informationSa/list", "Informationen", true, false)}
-                        {sidebarItem("/asset/prozessSa/list", "Prozesse", false, true)}
-                        {sidebarItem("/asset/anwendungSa/list", "Anwendungen",  false,true)}
-                        {sidebarItem("/asset/ciSa/list", "Ci",  false,true)}
+                        {sidebarItem("/asset/informationSa/", "Informationen", true, false)}
+                        {sidebarItem("/asset/prozessSa/", "Prozesse", false, true)}
+                        {sidebarItem("/asset/anwendungSa/", "Anwendungen",  false,true)}
+                        {sidebarItem("/asset/ciSa/", "Ci",  false,true)}
 
                         <li className="sidebar-header">
                             SCHUTZBEDARFANALYSE
                         </li>
 
-                        {sidebarItem("/asset/informationSb/list", "Informationen", false, true)}
-                        {sidebarItem("/asset/prozessSb/list", "Prozesse", false, true)}
-                        {sidebarItem("/asset/anwendungSb/list", "Anwendungen", false,true)}
-                        {sidebarItem("/asset/ciSb/list", "Ci",  false,true)}
+                        {sidebarItem("/asset/informationSb/", "Informationen", false, true)}
+                        {sidebarItem("/asset/prozessSb/", "Prozesse", false, true)}
+                        {sidebarItem("/asset/anwendungSb/", "Anwendungen", false,true)}
+                        {sidebarItem("/asset/ciSb/", "Ci",  false,true)}
 
                         <li className="sidebar-header">
                             BUSINESS IMPACT ANALYSE

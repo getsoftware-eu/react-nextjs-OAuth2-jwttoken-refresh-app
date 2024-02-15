@@ -39,6 +39,8 @@ function Login() {
     })
   };
 
+  //TODO localStorage.removeItem('next-auth.session-token');  after logout
+  
   return (
       <>
         {/*<div className="wrapper">*/}
