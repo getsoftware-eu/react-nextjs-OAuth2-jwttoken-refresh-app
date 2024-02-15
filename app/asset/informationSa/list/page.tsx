@@ -17,6 +17,7 @@ export default function InformationSaList({ params }) {
     const axiosAuth = useAxiosAuth();
 
     const [assets, setAssets] = useState({});
+    const [sessionUpdated, setSessionUpdated] = useState(false);
 
     const getServerAsynchData = async () => {
         const res = await axiosAuth.get("/api/v1/asset/informations/");
@@ -24,15 +25,13 @@ export default function InformationSaList({ params }) {
         let informationArray = res.data;
         if (Array.isArray(informationArray)) {
             setAssets(informationArray);
-            isUpdated=true;
+            setSessionUpdated(true);
         }
     };
     
-    let isUpdated= false;
-
     useEffect(() => {
 
-            if (session && !isUpdated) {
+            if (session && !sessionUpdated) {
                 getServerAsynchData().then();
             }
        //wait untill session!! sonst keine Abfrage!
@@ -56,9 +55,10 @@ export default function InformationSaList({ params }) {
                                 <div className="col-12">
                                     <div className="card">
                                         <div className="card-body">
-                                            {session 
-                                                ? <InformationSaDataListTable givenAssets={assets} />
-                                                : <p>Loading...</p>
+                                            {(sessionUpdated) ? 
+                                                ( <InformationSaDataListTable givenAssets={assets} /> )
+                                                : 
+                                                ( <p>Loading...</p> )
                                             }
                                         </div>
                                     </div>
