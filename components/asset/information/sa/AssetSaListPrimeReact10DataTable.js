@@ -252,7 +252,7 @@ export default function InformationSaDataListTable({ givenAssets }) {
                         </svg>
                     </a>
                 </div>
-                <div className="col-auto">
+                <div className="col-auto" data-eugen-tipp="row-click-selection">
                     <InputSwitch checked={rowClick} onChange={(e) => setRowClick(e.value)} />
                 </div>
             </div>
