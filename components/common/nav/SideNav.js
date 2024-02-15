@@ -1,8 +1,9 @@
 import React from "react";
 import FeatherIcon from 'feather-icons-react';
+import {usePathname} from "next/navigation";
 
 // <!-- Global Nav -->
-function SideNav(message, error) {
+function SideNav({pagePath, message, error}) {
 
     let systemMsg;
 
@@ -11,16 +12,28 @@ function SideNav(message, error) {
     else if (error)
         systemMsg = error
 
-    const getServerAsynchInitData = async () => {
-        const res = await axiosAuth.get("/api/v1/user/informations/");
+    const pathname = usePathname();
 
-        let informationArray = res.data;
-        if (Array.isArray(informationArray)) {
-            setAssets(informationArray);
-            isUpdated=true;
-        }
-    };
-    
+    // const getServerAsynchInitData = async () => {
+    //     const res = await axiosAuth.get("/api/v1/user/informations/");
+    //
+    //     let informationArray = res.data;
+    //     if (Array.isArray(informationArray)) {
+    //         setAssets(informationArray);
+    //         sessionUpdated=true;
+    //     }
+    // };
+
+    function menuItem(pagePath, title, icon) {
+        return <li 
+            className={pathname.startsWith(pagePath) ? "sidebar-item active" : "sidebar-item"}>
+            <a className="sidebar-link" href={pagePath}>
+                <i className={"align-middle me-2 fa-fw " + icon}></i>
+                <span className="align-middle">{title}</span>
+            </a>
+        </li>;
+    }
+
     return (
         <>
             <nav id="sidebar" className="sidebar">
@@ -29,32 +42,8 @@ function SideNav(message, error) {
                 </a>
                 <div className="sidebar-content">
                     <ul className="sidebar-nav mt-2">
-
-                        <li className="sidebar-item">
-                            
                         
-                        {/*    <a className="sidebar-link disabledLink disabled">*/}
-                        
-                        {/*        <i className="align-middle me-2 fas fa-fw fa-exchange-alt "></i>*/}
-                        {/*        <span className="align-middle">Workflow-Debug</span>*/}
-                        
-                        
-                        {/*    </a>*/}
-                        {/*</li>*/}
-                        
-                        {/*<li className="sidebar-item">*/}
-
-
-
-
-                            <a className="sidebar-link" href="/dashboard">
-
-                                <i className="align-middle me-2 fas fa-fw fa-home "></i>
-                                <span className="align-middle">Dashboard</span>
-
-
-                            </a>
-                        </li>
+                        {menuItem("/dashboard", "Dashboard", "fas fa-home")}
 
 
                         <li className="sidebar-item">
@@ -69,8 +58,6 @@ function SideNav(message, error) {
                                 <li className="sidebar-item">
 
 
-
-
                                     <a className="disabledLink sidebar-link dropdown-item disabled">
 
                                         <i className="align-middle me-2 far fa-fw fa-calendar-alt disabledLink"></i>
@@ -81,8 +68,6 @@ function SideNav(message, error) {
                                 </li>
 
                                 <li className="sidebar-item">
-
-
 
 
                                     <a className="disabledLink sidebar-link dropdown-item disabled">
@@ -99,9 +84,6 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-
-
-
                             <a className="sidebar-link disabledLink disabled" href="#">
 
                                 <i className="align-middle me-2 fas fa-fw ion ion-md-stats "></i>
@@ -111,68 +93,32 @@ function SideNav(message, error) {
                             </a>
                         </li>
 
-
                         <li className="sidebar-header">
                             STRUKTURANALYSE
                         </li>
 
-                        <li className="sidebar-item active">
-
-
-
-
-                            <a className="sidebar-link" href="/asset/informationSa/list">
-
-                                <i className="align-middle me-2 far fa-fw fa-edit "></i>
-                                <span className="align-middle">Informationen</span>
-
-
-                            </a>
-                        </li>
+                        {menuItem("/asset/informationSa/list", "Informationen", "far fa-edit")}
 
                         <li className="sidebar-item">
-
-
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
-
-                                
                                 {/*<i className="align-middle me-2 fas fa-fw fa-check "></i>*/}
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Prozesse</span>
-
-
                             </a>
                         </li>
 
                         <li className="sidebar-item">
-
-
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
-
                                 {/*<i className="align-middle me-2" data-feather="file"></i>*/}
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Anwendungen</span>
-
-
                             </a>
                         </li>
 
                         <li className="sidebar-item">
-
-
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
-
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Ci</span>
-
                             </a>
                         </li>
 
@@ -183,12 +129,9 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
 
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Informationen</span>
 
 
@@ -198,12 +141,9 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
 
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Prozesse</span>
 
 
@@ -213,12 +153,9 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
 
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Anwendungen</span>
 
 
@@ -228,13 +165,10 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
 
                                 {/*<i className="align-middle me-2 disabledLink" data-feather="file"></i>*/}
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Ci</span>
 
 
@@ -248,12 +182,9 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
 
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Prozesse</span>
 
 
@@ -267,12 +198,9 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="sidebar-link" href="/richtlinie/list/intern/true">
 
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Interne Richtlinien</span>
 
 
@@ -287,7 +215,7 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
                             <a data-bs-target="#raNavbar" data-bs-toggle="collapse"
                                className="sidebar-link collapsed disabledLink">
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Self Assessment</span>
                             </a>
                             <ul id="raNavbar" className="sidebar-dropdown list-unstyled collapse"
@@ -296,12 +224,9 @@ function SideNav(message, error) {
                                 <li className="sidebar-item">
 
 
-                                    
-
-
                                     <a className="disabledLink sidebar-link dropdown-item disabled">
 
-                                        <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                        <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                         <span className="align-middle">Prozesse</span>
 
 
@@ -311,12 +236,9 @@ function SideNav(message, error) {
                                 <li className="sidebar-item">
 
 
-                                    
-
-
                                     <a className="disabledLink sidebar-link dropdown-item disabled">
 
-                                        <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                        <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                         <span className="align-middle">Anwendungen</span>
 
 
@@ -328,12 +250,9 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
 
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Risikoentscheidung</span>
 
 
@@ -343,12 +262,9 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
 
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Risikoinventar</span>
 
 
@@ -358,12 +274,9 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="sidebar-link" href="/massnahme/list">
 
-                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink" />
+                                <FeatherIcon icon="file" className="align-middle me-2 disabledLink"/>
                                 <span className="align-middle">Maßnahmen</span>
 
 
@@ -375,9 +288,6 @@ function SideNav(message, error) {
                         </li>
 
                         <li className="sidebar-item">
-
-
-                            
 
 
                             <a className="disabledLink sidebar-link dropdown-item disabled">
@@ -392,9 +302,6 @@ function SideNav(message, error) {
                         <li className="sidebar-item">
 
 
-                            
-
-
                             <a className="disabledLink sidebar-link dropdown-item disabled">
 
                                 <i className="align-middle me-2 fas fa-fw fa-file-alt disabledLink"></i>
@@ -405,9 +312,6 @@ function SideNav(message, error) {
                         </li>
 
                         <li className="sidebar-item">
-
-
-                            
 
 
                             <a className="disabledLink sidebar-link dropdown-item disabled">

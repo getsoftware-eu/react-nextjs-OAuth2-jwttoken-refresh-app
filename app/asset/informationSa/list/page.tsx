@@ -41,7 +41,7 @@ export default function InformationSaList({ params }) {
         return (
             <>
             <div className="wrapper">
-                <SideNav />
+                <SideNav/>
                 <div className="main">
                     <AppTopNav/>
                     <main className="content">
