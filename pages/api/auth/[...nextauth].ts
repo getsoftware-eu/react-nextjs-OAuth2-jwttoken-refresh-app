@@ -1,6 +1,10 @@
 import NextAuth, { AuthOptions, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+const MINUTE = 60;
+const HOUR = 60 * MINUTE;
+
 export const authOptions: AuthOptions = {
   // Configure one or more authentication providers
   providers: [
@@ -42,15 +46,40 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  session: {
+    maxAge: 8 * HOUR, // 8 hours
+  },
+  pages: {
+    signIn: '/login',
+  },
   callbacks: {
-    async jwt({ token, user, account }) {
-      console.log({ account });
+    async jwt({ token, user, session }) {
+      console.log("jwt callback ", { token, user, session  });
 
+      // if (user) {
+      //     token.accessToken = user.accessToken;
+      //     token.refreshToken = user.refreshToken;
+      //     token.accessTokenExpires = user.accessTokenExpires;
+      //     // token.role = user.role;
+      //     token.id = user.id;
+      //     token.name = user.name;
+      //     token.email = user.email;
+      //     // token.jwt = user.jwt;
+      // }
+      
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
+      console.log("session callback ", { token, user, session });
+
       session.user = token as any;
 
+      // session.user.id = token.id;
+      // session.user.accessToken = token.accessToken;
+      // session.user.refreshToken = token.refreshToken;
+      // session.user.name = token.name;
+      // session.user.email = token.email;
+      
       return session;
     },
   },

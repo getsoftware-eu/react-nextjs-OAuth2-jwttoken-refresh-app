@@ -2,7 +2,7 @@
 import {signIn, signOut, useSession} from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, {useEffect} from "react";
 import { useForm } from "react-hook-form";
 // import { Toaster } from "react-hot-toast";
 // import {remove} from "/redux/userSlice";
@@ -27,6 +27,22 @@ function Login() {
       callbackUrl: "/asset/informationSa/list"
     })
   };
+
+  useEffect(() => {
+    // Perform localStorage action
+    const savedSessionTokenItem = localStorage.getItem('next-auth.session-token')
+
+    if(savedSessionTokenItem)
+    {
+      console.log("savedSessionTokenItem " + savedSessionTokenItem);
+      // localStorage.removeItem('next-auth.session-token');
+    }
+
+    if (session && status === "authenticated") {
+      window.location.href = process.env.NEXT_PUBLIC_FRONTEND_URL+"/asset/informationSa/list"
+    }
+    
+  }, [session])
   
   return (
       <>
