@@ -4,10 +4,10 @@ interface AssetDTO {
     ownerId: number | null;
     editorId: number | null;
     vertreterId: number | null;
-    saStatus: string;
-    sbStatus: string;
+    saStatus: string | null;
+    sbStatus: string | null;
     beschreibung: string;
-    canEdit: boolean;
+    // canEdit: boolean;
 }
 
  interface UserDTO {

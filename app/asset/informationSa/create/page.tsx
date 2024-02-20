@@ -31,7 +31,7 @@ function CreateInformation({ props }) {
 
   //TODO const informationService = new InformationService(session);
 
-  const [assets, setAssets] = useState();
+  const [assets, setAssets] = useState<AssetDTO[]>();
 
   const formBtnRef = useRef(null); //btn form action
 
@@ -63,18 +63,18 @@ function CreateInformation({ props }) {
   
   const onSubmit = (data: any) => {
 
-    let _user: UserDTO = null;
+    // let _user: UserDTO = null;
     
     let _asset: AssetDTO = {
-      entityId: data.entityId,
+      entityId: data.entityId || 0,
       name: data.name,
-      saStatus: data.saStatus,
-      sbStatus: data.sbStatus,
+      saStatus: data.saStatus || null,
+      sbStatus: data.sbStatus || null,
       ownerId: null,
       vertreterId: null,
       editorId: null,
       beschreibung: data.beschreibung,
-      canEdit: data.canEdit
+      // canEdit: data.canEdit || false
     };
 
     let formData = createPostFormData(_asset);

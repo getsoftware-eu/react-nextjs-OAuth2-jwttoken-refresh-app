@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, {useEffect} from "react";
 import { useForm } from "react-hook-form";
+// import { useCookies } from 'next-client-cookies';
 // import { Toaster } from "react-hot-toast";
 // import {remove} from "/redux/userSlice";
 // import {LogoutIcon} from "@heroicons/react/outline";
@@ -13,6 +14,7 @@ function Login() {
 
   const { data: session, status } = useSession()
   // const dispatch = useDispatch();
+  // const cookies = useCookies();
 
   const {
     register,
@@ -30,12 +32,13 @@ function Login() {
 
   useEffect(() => {
     // Perform localStorage action
-    const savedSessionTokenItem = localStorage.getItem('next-auth.session-token')
+    // const savedSessionTokenItem = localStorage.getItem('next-auth.session-token')
 
-    if(savedSessionTokenItem)
+    // if(cookies && cookies.get('next-auth.session-token.2'))
     {
-      console.log("savedSessionTokenItem " + savedSessionTokenItem);
+      // console.log("savedSessionTokenItem " + cookies.get('next-auth.session-token.2'));
       // localStorage.removeItem('next-auth.session-token');
+      // cookies.delete('name')
     }
 
     if (session && status === "authenticated") {

@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect, useRef, useState} from "react";
+import React, {FormEvent, useEffect, useRef, useState} from "react";
 // import UserService from "/services/userService";
 //TODO Using useReducer to perform advanced validation on Reactjs forms
 import {useSession} from "next-auth/react";
@@ -44,7 +44,18 @@ export default function InformationDetail({ params }) {
   const router = useRouter();
   // const dispatch = useDispatch();
 
-  const [asset, setAsset] = useState({}); // Declare an init state, sonst undefined state error...
+  const _initAsset: AssetDTO = {
+    entityId: 0,
+    ownerId: null,
+    editorId: null,
+    vertreterId: null,
+    name : "",
+    beschreibung : "",
+    saStatus: "",
+    sbStatus: "",
+    canEdit: true
+  }
+  const [asset, setAsset] = React.useState<AssetDTO>(_initAsset); // Declare an init state, sonst undefined state error...
 
   const formBtnRef = useRef(null); //btn form action
   
@@ -87,10 +98,7 @@ export default function InformationDetail({ params }) {
 
   const onSubmit = (formDataValues) => {
 
-    let usr: UserDTO =
-      {
-        
-      };
+    // let usr: UserDTO = {};
     
     let submitAsset: AssetDTO = {
       entityId: assetId,
@@ -173,7 +181,7 @@ export default function InformationDetail({ params }) {
   //   }
   // };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setAsset((prevAsset) => ({ ...prevAsset, [name]: value }));
   };
