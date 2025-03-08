@@ -1,3 +1,11 @@
+# Project Goal
+
+I found it difficult to find examples online where a React application communicates with a Spring Boot backend using OAuth 2.0, including handling tokens within React, user authentication in the session, and refresh token management on the backend.
+
+So, I created this project to debug and refine the OAuth 2.0 interaction between React and the backend for myself.
+
+# React OAuth 2.0 with Spring Boot
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 NextJS Version 13!
